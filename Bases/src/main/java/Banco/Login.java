@@ -4,6 +4,8 @@
  */
 package Banco;
 
+import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+
 /**
  *
  * @author Oley
@@ -28,7 +30,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         IniciarSesion = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,10 +43,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Registrarse");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrarse");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -61,7 +63,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(238, 238, 238)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(IniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(251, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -71,9 +73,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(44, 44, 44)
                 .addComponent(IniciarSesion)
-                .addGap(44, 44, 44)
-                .addComponent(jButton2)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(btnRegistrar)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,49 +87,14 @@ InterfazInicioSesion ventanaInicioSesion = new InterfazInicioSesion();
     dispose();
     }//GEN-LAST:event_IniciarSesionActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Registrarse re = new Registrarse();
-    re.setVisible(true);
-    dispose();    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        Registrarse re = new Registrarse(IClientesDAO clientesDAO);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton IniciarSesion;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

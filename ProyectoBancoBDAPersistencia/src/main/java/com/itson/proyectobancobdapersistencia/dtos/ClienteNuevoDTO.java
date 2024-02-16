@@ -112,13 +112,7 @@ public class ClienteNuevoDTO {
         if(this.nombre == null 
                 || this.nombre.isBlank() 
                 || this.nombre.trim().length() > 100){
-            
-            patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
-            coincidencia = patron.matcher(nombre);
-            
-            if (!coincidencia.matches()) {
-                return false;
-            }     
+             
             throw new ValidacionDTOException("Nombre de cliente inválido");
         }
         
@@ -150,10 +144,10 @@ public class ClienteNuevoDTO {
             throw new ValidacionDTOException("Apellido Materno de cliente inválido");
         }
         
-        //VALIDACIÓN DE FECHA DE NACIMIENTO
-        if (this.fechaNacimiento == null) {
-            throw new ValidacionDTOException("Fecha de nacimiento de cliente inválido");
-        }
+//        //VALIDACIÓN DE FECHA DE NACIMIENTO
+//        if (this.fechaNacimiento == null) {
+//            throw new ValidacionDTOException("Fecha de nacimiento de cliente inválido");
+//        }
         
         //VALIDACIÓN DE COLONIA
         if(this.colonia == null 
@@ -190,7 +184,6 @@ public class ClienteNuevoDTO {
             coincidencia = patron.matcher(codigoPostal);
 
             if (!coincidencia.matches()) {
-                return false;
             }
             throw new ValidacionDTOException("Código Postal inválido");
         }

@@ -33,5 +33,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.bases.Bases</exec.mainClass>
     </properties>
-    <name>ProyectoBancoBDA</name>
+    <name>Bases</name>
 </project>
