@@ -21,18 +21,21 @@ USE `proyecto_banco_bda` ;
 -- Table `proyecto_banco_bda`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`clientes` (
-  `id_cliente` INT NOT NULL,
+  `id_cliente` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(200) NOT NULL,
   `apellido_paterno` VARCHAR(200) NOT NULL,
   `apellido_materno` VARCHAR(200) NOT NULL,
-  `fecha_nacimiento` DATE NOT NULL,
+  `fecha_nacimiento` DATE NULL DEFAULT NULL,
   `calle` VARCHAR(300) NOT NULL,
   `colonia` VARCHAR(200) NOT NULL,
   `numero_interior` VARCHAR(5) NULL DEFAULT NULL,
   `numero_exterior` VARCHAR(10) NULL DEFAULT '0',
   `codigo_postal` VARCHAR(5) NOT NULL,
+  `usuario_cliente` VARCHAR(45) NOT NULL,
+  `contrasenia_cliente` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id_cliente`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -41,14 +44,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `proyecto_banco_bda`.`cuentas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`cuentas` (
-  `id_cuenta` INT NOT NULL,
-  `numero_cuenta` INT NULL DEFAULT NULL,
-  `fecha_apertura` DATE NULL DEFAULT NULL,
-  `saldo_pesos` INT NULL DEFAULT NULL,
-  `id_cliente` INT NULL DEFAULT NULL,
+  `id_cuenta` INT NOT NULL AUTO_INCREMENT,
+  `id_cliente` INT NOT NULL,
+  `numero_cuenta` INT NOT NULL,
+  `fecha_apertura` DATE NOT NULL,
+  `saldo_en_pesos` DECIMAL(15,2) NOT NULL,
   PRIMARY KEY (`id_cuenta`),
-  INDEX `id_cliente` (`id_cliente` ASC) VISIBLE,
-  CONSTRAINT `Cuentas_ibfk_1`
+  INDEX `id_cliente_idx` (`id_cliente` ASC) VISIBLE,
+  CONSTRAINT `cuentas_ibfk_1`
     FOREIGN KEY (`id_cliente`)
     REFERENCES `proyecto_banco_bda`.`clientes` (`id_cliente`))
 ENGINE = InnoDB
@@ -73,16 +76,16 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`cuentastransacciones` (
   `id_cuenta_transaccion` INT NOT NULL,
-  `id_cuenta` INT NULL DEFAULT NULL,
-  `id_transaccion` INT NULL DEFAULT NULL,
-  `fecha_hora_transaccion` DATETIME NULL DEFAULT NULL,
+  `id_cuenta` INT NOT NULL,
+  `id_transaccion` INT NOT NULL,
+  `fecha_hora_transaccion` DATETIME NOT NULL,
   PRIMARY KEY (`id_cuenta_transaccion`),
   INDEX `id_transaccion` (`id_transaccion` ASC) VISIBLE,
-  INDEX `Transacciones_ibfk_1` (`id_cuenta` ASC) VISIBLE,
+  INDEX `fk_cuentastransacciones_1_idx` (`id_cuenta` ASC) VISIBLE,
   CONSTRAINT `cuentastransacciones_ibfk_1`
     FOREIGN KEY (`id_transaccion`)
     REFERENCES `proyecto_banco_bda`.`transacciones` (`id_transaccion`),
-  CONSTRAINT `Transacciones_ibfk_1`
+  CONSTRAINT `id_cuenta`
     FOREIGN KEY (`id_cuenta`)
     REFERENCES `proyecto_banco_bda`.`cuentas` (`id_cuenta`))
 ENGINE = InnoDB
