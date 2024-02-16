@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/AWTForms/Frame.java to edit this template
  */
-package Banco;
+package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
@@ -31,7 +31,7 @@ public class Registrarse extends java.awt.Frame {
         String nombre = txtNombre.getText();
         String apellidoPaterno = txtApellidoPaterno.getText();
         String apellidoMaterno = txtApellidoMaterno.getText();
-        String fechaNacimiento = txtFechaNacimiento.getText();
+//        String fechaNacimiento = txtFechaNacimiento.getText();
         String calle = txtCalle.getText();
         String colonia = txtColonia.getText();
         String numInterior = txtNumInterior.getText();
@@ -43,7 +43,7 @@ public class Registrarse extends java.awt.Frame {
         clienteNuevo.setNombre(nombre);
         clienteNuevo.setApellidoPaterno(apellidoPaterno);
         clienteNuevo.setApellidoMaterno(apellidoMaterno);
-        clienteNuevo.setFechaNacimiento(fechaNacimiento);
+//        clienteNuevo.setFechaNacimiento(fechaNacimiento);
         clienteNuevo.setCalle(calle);
         clienteNuevo.setColonia(colonia);
         clienteNuevo.setNumInterior(numInterior);
@@ -77,7 +77,7 @@ public class Registrarse extends java.awt.Frame {
         txtNombre.setText("");
         txtApellidoPaterno.setText("");
         txtApellidoMaterno.setText("");
-        txtFechaNacimiento.setText("");
+//        txtFechaNacimiento.setText("");
         txtCalle.setText("");
         txtColonia.setText("");
         txtNumInterior.setText("");
@@ -116,7 +116,6 @@ public class Registrarse extends java.awt.Frame {
         Nombre3 = new javax.swing.JLabel();
         btnRegresar1 = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        txtFechaNacimiento = new javax.swing.JTextField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -192,7 +191,6 @@ public class Registrarse extends java.awt.Frame {
             }
         });
         add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
-        add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,7 +203,7 @@ public class Registrarse extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // TODO add your handling code here:
+        guardar();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
@@ -239,7 +237,6 @@ public class Registrarse extends java.awt.Frame {
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumExterior;
     private javax.swing.JTextField txtNumInterior;

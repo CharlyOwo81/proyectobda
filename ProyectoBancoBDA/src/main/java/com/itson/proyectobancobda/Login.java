@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Banco;
+package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 
@@ -88,7 +88,7 @@ InterfazInicioSesion ventanaInicioSesion = new InterfazInicioSesion();
     }//GEN-LAST:event_IniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Registrarse re = new Registrarse(IClientesDAO clientesDAO);
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
 

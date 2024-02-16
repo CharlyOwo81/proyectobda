@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package Banco;
+package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdapersistencia.conexion.Conexion;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
@@ -14,9 +14,9 @@ import java.util.logging.Logger;
  *
  * @author gamaliel
  */
-public class Banco {
+public class ProyectoBancoBDA {
 
-    static final Logger logger = Logger.getLogger(Banco.class.getName());    
+    static final Logger logger = Logger.getLogger(ProyectoBancoBDA.class.getName());    
     /**
      * @param args the command line arguments
      */
