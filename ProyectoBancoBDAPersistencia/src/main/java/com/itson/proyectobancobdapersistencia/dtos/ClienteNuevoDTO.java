@@ -29,8 +29,8 @@ public class ClienteNuevoDTO {
     private String codigoPostal;
     
     //ATRIBUTOS - VALIDACIONES
-    private String validadorEnEspaniol = "[^\\\\w\\\\sáéíóúüñ]";
-    private String validadorNumerico = "[^\\\\d]+";
+    private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
+    private String validadorNumerico = "^[0-9]+$";
     private Pattern patron;
     private Matcher coincidencia;
 
@@ -106,87 +106,92 @@ public class ClienteNuevoDTO {
         this.codigoPostal = codigoPostal;
     } 
     
-    public boolean esValido() throws ValidacionDTOException{
-    
-        //VALIDACIÓN DE NOMBRES
-        if(this.nombre == null 
-                || this.nombre.isBlank() 
-                || this.nombre.trim().length() > 100){
-             
+    public boolean esValido() throws ValidacionDTOException {
+        try {
+            validarNombre();
+            validarApellidoPaterno();
+            validarApellidoMaterno();
+            validarFechaNacimiento();
+            validarColonia();
+            validarCalle();
+            validarCodigoPostal();
+            return true;
+        } catch (ValidacionDTOException ex) {
+            throw ex;
+        }
+    }
+
+    private void validarNombre() throws ValidacionDTOException {
+        if (nombre == null || nombre.isBlank() || nombre.trim().length() > 100) {
             throw new ValidacionDTOException("Nombre de cliente inválido");
         }
-        
-        //VALIDACIÓN DE APELLIDO PATERNO
-        if (this.apellidoPaterno == null 
-                || this.apellidoPaterno.isBlank() 
-                || this.apellidoPaterno.trim().length() > 100) {
-            
-            patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
-            coincidencia = patron.matcher(apellidoMaterno);
-            
-            if (!coincidencia.matches()) {
-                return false;
-            }                     
-            throw new ValidacionDTOException("Apellido Paterno de cliente inválido");            
+        validarExpresionRegular(nombre, "Nombre de cliente inválido");
+    }
+
+    private void validarApellidoPaterno() throws ValidacionDTOException {
+        if (apellidoPaterno == null || apellidoPaterno.isBlank() || apellidoPaterno.trim().length() > 100) {
+            throw new ValidacionDTOException("Apellido Paterno de cliente inválido");
         }
-        
-        //VALIDACIÓN DE APELLIDO MATERNO
-        if (this.apellidoMaterno == null 
-                || this.apellidoMaterno.isBlank() 
-                || this.apellidoMaterno.trim().length() > 100) {
-            
-            patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
-            coincidencia = patron.matcher(apellidoMaterno);
-            
-            if (!coincidencia.matches()) {
-                return false;
-            }            
+        validarExpresionRegular(apellidoPaterno, "Apellido Paterno de cliente inválido");
+    }
+
+    private void validarApellidoMaterno() throws ValidacionDTOException {
+        if (apellidoMaterno == null || apellidoMaterno.isBlank() || apellidoMaterno.trim().length() > 100) {
             throw new ValidacionDTOException("Apellido Materno de cliente inválido");
         }
-        
-//        //VALIDACIÓN DE FECHA DE NACIMIENTO
-//        if (this.fechaNacimiento == null) {
-//            throw new ValidacionDTOException("Fecha de nacimiento de cliente inválido");
-//        }
-        
-        //VALIDACIÓN DE COLONIA
-        if(this.colonia == null 
-                || this.colonia.isBlank() 
-                || this.colonia.trim().length() > 200){        
-            
-            patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
-            coincidencia = patron.matcher(colonia);
-            
-            if (!coincidencia.matches()) {
-                return false;
-            }
-            throw new ValidacionDTOException("Colonia inválida");
-        }
-        
-        //VALIDACIÓN DE CALLE
-        if (this.calle == null 
-                || this.calle.isBlank() 
-                || this.calle.trim().length() > 300) {
-            
-            patron = patron.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
-            coincidencia = patron.matcher(calle);
-            
-            if (!coincidencia.matches()) {
-                return false;
-            }
+        validarExpresionRegular(apellidoMaterno, "Apellido Materno de cliente inválido");
+    }
+
+    private void validarFechaNacimiento() throws ValidacionDTOException {
+        // Validar la fecha de nacimiento aquí
+    }
+
+    private void validarCalle() throws ValidacionDTOException {
+        if (calle == null || calle.isBlank() || calle.trim().length() > 300) {
             throw new ValidacionDTOException("Calle inválida");
         }
-        
-        //VALIDACIÓN DE CÓDIGO POSTAL
-        if (this.codigoPostal.trim().length() > 5) {        
-            
-            patron = patron.compile(validadorNumerico);
-            coincidencia = patron.matcher(codigoPostal);
+        validarExpresionRegular(calle, "Calle inválida");
+    }
+    
+    private void validarColonia() throws ValidacionDTOException {
+        if (colonia == null || colonia.isBlank() || colonia.trim().length() > 200) {
+            throw new ValidacionDTOException("Colonia inválida");
+        }
+        validarExpresionRegular(colonia, "Colonia inválida");
+    }
 
-            if (!coincidencia.matches()) {
-            }
+    private void validarNumInterior() throws ValidacionDTOException {
+        if (numInterior != null && numInterior.trim().length() <= 5) {
+            validadorNumerico(numInterior, "Número Interior inválido");
+        }
+    }    
+
+    private void validarNumExterior() throws ValidacionDTOException {
+        if (numExterior != null && numExterior.trim().length() <= 10) {
+            validadorNumerico(numExterior, "Número Exterior inválido");
+        }
+    }    
+    
+    private void validarCodigoPostal() throws ValidacionDTOException {
+        if (codigoPostal == null || codigoPostal.isBlank() || codigoPostal.trim().length() != 5) {
             throw new ValidacionDTOException("Código Postal inválido");
         }
-        return true;
+            validadorNumerico(codigoPostal, "Código Postal inválido");        
     }
+    
+    private void validarExpresionRegular(String texto, String mensajeError) throws ValidacionDTOException {
+        patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
+        }
+    }
+    
+    private void validadorNumerico(String texto, String mensajeError) throws ValidacionDTOException {
+        patron = Pattern.compile(validadorNumerico);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
+        }
+    }    
 }
