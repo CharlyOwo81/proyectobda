@@ -29,9 +29,9 @@ public class ClientesDAO implements IClientesDAO {
 
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
-        String sentenciaSQL = """
-         INSERT INTO socios (nombre, telefono,correo)
-         VALUES (?,?,?);
+        String clienteNuevoSQL = """
+         INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal)
+         VALUES (?,?,?,?,?,?,?,?,?);
          """;
 
     }
