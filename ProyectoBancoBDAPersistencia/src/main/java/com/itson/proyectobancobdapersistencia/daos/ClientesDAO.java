@@ -33,6 +33,7 @@ public class ClientesDAO implements IClientesDAO {
          INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal)
          VALUES (?,?,?,?,?,?,?,?,?);
          """;
+        System.out.println("Hola");
 
     }
 
