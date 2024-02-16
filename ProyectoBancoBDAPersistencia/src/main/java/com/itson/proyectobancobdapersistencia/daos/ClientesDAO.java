@@ -30,11 +30,46 @@ public class ClientesDAO implements IClientesDAO {
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String clienteNuevoSQL = """
-         INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal)
-         VALUES (?,?,?,?,?,?,?,?,?);
-         """;
-        System.out.println("Hola");
+                INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal)
+                VALUES (?,?,?,?,?,?,?,?,?);
+                """;
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion(); 
+            PreparedStatement comando = conexion.prepareStatement(clienteNuevoSQL,Statement.RETURN_GENERATED_KEYS);) {
 
+            comando.setString(1, clienteNuevo.getNombre());
+            comando.setString(2, clienteNuevo.getApellidoPaterno());
+            comando.setString(3, clienteNuevo.getApellidoMaterno());
+            comando.setDate(4, clienteNuevo.getFechaNacimiento());
+            comando.setString(5, clienteNuevo.getCalle());
+            comando.setString(6, clienteNuevo.getColonia());
+            comando.setString(7, clienteNuevo.getNumInterior());
+            comando.setString(8, clienteNuevo.getNumExterior());
+            comando.setString(9, clienteNuevo.getCodigoPostal());
+
+            int numeroRegistrosInsertados = comando.executeUpdate();
+
+            logger.log(Level.INFO, "Se agregaron {0} clientes", numeroRegistrosInsertados);
+            
+            ResultSet idsGenerados=comando.getGeneratedKeys();
+            idsGenerados.next();
+            
+            Cliente cliente = new Cliente(idsGenerados.getLong(1), 
+                    clienteNuevo.getNombre(),
+                    clienteNuevo.getApellidoPaterno(),
+                    clienteNuevo.getApellidoMaterno(),
+                    clienteNuevo.getFechaNacimiento(),
+                    clienteNuevo.getCalle(),
+                    clienteNuevo.getColonia(),
+                    clienteNuevo.getNumInterior(),
+                    clienteNuevo.getNumExterior(),
+                    clienteNuevo.getCodigoPostal());
+            return cliente;
+            
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "No se pudo guardar el Cliente", ex);
+            throw new PersistenciaException("No se pudo guardar el Cliente",ex);
+        } 
     }
 
     @Override

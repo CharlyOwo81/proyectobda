@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author
  */
 public class Cliente {
-    private int id;
+    private long id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -30,7 +30,7 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(int id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
+    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -43,11 +43,11 @@ public class Cliente {
         this.codigoPostal = codigoPostal;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
