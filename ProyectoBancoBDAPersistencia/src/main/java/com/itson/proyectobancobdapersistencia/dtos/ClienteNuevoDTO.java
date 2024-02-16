@@ -4,8 +4,10 @@
  */
 package com.itson.proyectobancobdapersistencia.dtos;
 
-import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +33,7 @@ public class ClienteNuevoDTO {
     //ATRIBUTOS - VALIDACIONES
     private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
     private String validadorNumerico = "^[0-9]+$";
+    private String validadorFechas = "\"^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$\"";
     private Pattern patron;
     private Matcher coincidencia;
 
@@ -115,6 +118,8 @@ public class ClienteNuevoDTO {
             validarColonia();
             validarCalle();
             validarCodigoPostal();
+            validarNumInterior();
+            validarNumExterior();
             return true;
         } catch (ValidacionDTOException ex) {
             throw ex;
@@ -142,10 +147,13 @@ public class ClienteNuevoDTO {
         validarExpresionRegular(apellidoMaterno, "Apellido Materno de cliente inválido");
     }
 
-    private void validarFechaNacimiento() throws ValidacionDTOException {
-        // Validar la fecha de nacimiento aquí
+    private void validarFechaNacimiento() throws ValidacionDTOException{
+        if (fechaNacimiento == null || fechaNacimiento.isBlank()) {
+            throw new ValidacionDTOException("Fecha de Nacimiento inválida");
+        }
+        validarFechas(fechaNacimiento, "Fecha de Nacimiento inválida");
     }
-
+    
     private void validarCalle() throws ValidacionDTOException {
         if (calle == null || calle.isBlank() || calle.trim().length() > 300) {
             throw new ValidacionDTOException("Calle inválida");
@@ -193,5 +201,14 @@ public class ClienteNuevoDTO {
         if (!coincidencia.matches()) {
             throw new ValidacionDTOException(mensajeError);
         }
-    }    
+    } 
+    
+    private void validarFechas(String texto, String mensajeError) throws ValidacionDTOException{
+        patron = Pattern.compile(validadorFechas);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
+        }
+    }
+    
 }
