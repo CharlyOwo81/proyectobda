@@ -4,24 +4,28 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Oley
  */
-public class Registrarse extends java.awt.Frame {
+public class RegistroForm extends java.awt.Frame {
 
     /**
-     * Creates new form Registrarse
+     * Creates new form RegistroForm
      */
     private final IClientesDAO clientesDAO;
     
-    public Registrarse(IClientesDAO clientesDAO) {
+    public RegistroForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
     }
@@ -31,19 +35,33 @@ public class Registrarse extends java.awt.Frame {
         String nombre = txtNombre.getText();
         String apellidoPaterno = txtApellidoPaterno.getText();
         String apellidoMaterno = txtApellidoMaterno.getText();
-//        String fechaNacimiento = txtFechaNacimiento.getText();
+        String fechaNacimiento = txtFechaNacimiento.getText();
+        // Validar el formato de la fecha de nacimiento con una expresión regular
+        if (fechaNacimiento.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+            // El formato de la fecha es válido, intentar convertir a Date
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf.setLenient(false);
+                Date date = sdf.parse(fechaNacimiento);
+                // La fecha es válida, hacer algo con ella
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "La fecha de nacimiento no es válida", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "El formato de la fecha de nacimiento no es válido", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+        }            
         String calle = txtCalle.getText();
         String colonia = txtColonia.getText();
         String numInterior = txtNumInterior.getText();
         String numExterior = txtNumExterior.getText();
         String codigoPostal = txtCodigoPostal.getText();    
-        
+       
         ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
         
         clienteNuevo.setNombre(nombre);
         clienteNuevo.setApellidoPaterno(apellidoPaterno);
         clienteNuevo.setApellidoMaterno(apellidoMaterno);
-//        clienteNuevo.setFechaNacimiento(fechaNacimiento);
+        clienteNuevo.setFechaNacimiento(fechaNacimiento);
         clienteNuevo.setCalle(calle);
         clienteNuevo.setColonia(colonia);
         clienteNuevo.setNumInterior(numInterior);
@@ -53,6 +71,7 @@ public class Registrarse extends java.awt.Frame {
         try {
             clienteNuevo.esValido();
             this.clientesDAO.agregar(clienteNuevo);
+            JOptionPane.showMessageDialog(this, "Cliente Agregado");
         } catch (ValidacionDTOException ex) {
             JOptionPane.showMessageDialog(this, 
                                             ex.getMessage(), 
@@ -77,7 +96,7 @@ public class Registrarse extends java.awt.Frame {
         txtNombre.setText("");
         txtApellidoPaterno.setText("");
         txtApellidoMaterno.setText("");
-//        txtFechaNacimiento.setText("");
+        txtFechaNacimiento.setText("");
         txtCalle.setText("");
         txtColonia.setText("");
         txtNumInterior.setText("");
@@ -116,6 +135,8 @@ public class Registrarse extends java.awt.Frame {
         Nombre3 = new javax.swing.JLabel();
         btnRegresar1 = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        txtFechaNacimiento = new javax.swing.JTextField();
+        lblAviso = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -191,6 +212,10 @@ public class Registrarse extends java.awt.Frame {
             }
         });
         add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+        add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, -1));
+
+        lblAviso.setText("En formato dd/mm/yyyy");
+        add(lblAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,9 +232,9 @@ public class Registrarse extends java.awt.Frame {
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
-        Login login = new Login();
-        login.setVisible(true);
-        dispose();
+        this.setVisible(false);
+        MenuPrincipalForm menuPrincipal = new MenuPrincipalForm(clientesDAO);
+        menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnRegresar1ActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -230,6 +255,7 @@ public class Registrarse extends java.awt.Frame {
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar1;
+    private javax.swing.JLabel lblAviso;
     private javax.swing.JLabel lblDatosPersonales;
     private javax.swing.JLabel lblDatosPersonales1;
     private javax.swing.JTextField txtApellidoMaterno;
@@ -237,6 +263,7 @@ public class Registrarse extends java.awt.Frame {
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
+    private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumExterior;
     private javax.swing.JTextField txtNumInterior;

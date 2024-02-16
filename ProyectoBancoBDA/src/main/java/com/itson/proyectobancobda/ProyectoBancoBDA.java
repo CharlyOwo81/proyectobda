@@ -26,8 +26,8 @@ public class ProyectoBancoBDA {
         String contrasenia = "TheVisitors1981";
         IConexion conexion = new Conexion(cadenaConexion, usuario, contrasenia);
         IClientesDAO ClientesDAO = new ClientesDAO(conexion);
-        Registrarse registroForm = new Registrarse(ClientesDAO);
-        registroForm.setVisible(true);        
+        MenuPrincipalForm menuPrincipalForm = new MenuPrincipalForm(ClientesDAO);
+        menuPrincipalForm.setVisible(true);        
     }
     
 }

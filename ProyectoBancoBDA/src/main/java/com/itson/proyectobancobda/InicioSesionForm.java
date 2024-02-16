@@ -4,17 +4,18 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+
 /**
  *
  * @author Oley
  */
-public class InterfazInicioSesion extends javax.swing.JFrame {
+public class InicioSesionForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InterfazInicioSesion
-     */
-    public InterfazInicioSesion() {
+    private final IClientesDAO clientesDAO;
+    public InicioSesionForm(IClientesDAO clientesDAO) {
         initComponents();
+        this.clientesDAO = clientesDAO;        
     }
 
     /**
@@ -109,52 +110,16 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
-Login login = new Login();
-    login.setVisible(true);
-    dispose();
+        this.setVisible(false);
+        MenuPrincipalForm menuPrincipal = new MenuPrincipalForm(clientesDAO);
+        menuPrincipal.setVisible(true);
     }//GEN-LAST:event_RegresarActionPerformed
 
     private void ContiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContiActionPerformed
-MisTarjetas tar = new MisTarjetas();
-    tar.setVisible(true);
-    dispose();
+
      }//GEN-LAST:event_ContiActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfazInicioSesion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Conti;

@@ -4,18 +4,22 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+
+
 
 /**
  *
  * @author Oley
  */
-public class Login extends javax.swing.JFrame {
+public class MenuPrincipalForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
-    public Login() {
+
+    private final IClientesDAO clientesDAO;
+
+    public MenuPrincipalForm(IClientesDAO clientesDAO) {
+        this.clientesDAO = clientesDAO;
         initComponents();
     }
 
@@ -82,13 +86,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
-InterfazInicioSesion ventanaInicioSesion = new InterfazInicioSesion();
-    ventanaInicioSesion.setVisible(true);
-    dispose();
+        this.setVisible(false);
+        InicioSesionForm ventanaInicioSesion = new InicioSesionForm(clientesDAO);
+        ventanaInicioSesion.setVisible(true);
     }//GEN-LAST:event_IniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
+        this.setVisible(false);
+        RegistroForm ventanaRegistro = new RegistroForm(clientesDAO);
+        ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
 
