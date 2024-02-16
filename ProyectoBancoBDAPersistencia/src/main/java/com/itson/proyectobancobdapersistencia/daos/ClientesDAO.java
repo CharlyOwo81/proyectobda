@@ -6,10 +6,12 @@ import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +42,7 @@ public class ClientesDAO implements IClientesDAO {
             comando.setString(1, clienteNuevo.getNombre());
             comando.setString(2, clienteNuevo.getApellidoPaterno());
             comando.setString(3, clienteNuevo.getApellidoMaterno());
-            comando.setDate(4, clienteNuevo.getFechaNacimiento());
+            comando.setString(4, clienteNuevo.getFechaNacimiento());
             comando.setString(5, clienteNuevo.getCalle());
             comando.setString(6, clienteNuevo.getColonia());
             comando.setString(7, clienteNuevo.getNumInterior());
@@ -74,6 +76,45 @@ public class ClientesDAO implements IClientesDAO {
 
     @Override
     public List<Cliente> consultar() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sentenciaSQL = """
+            SELECT nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal
+            FROM clientes;
+            """;
+        
+        List<Cliente> listaClientes = new LinkedList<>();
+        try (
+            Connection conexion = this.conexionBD.obtenerConexion(); 
+            PreparedStatement comando = conexion.prepareStatement(sentenciaSQL);
+            ResultSet resultados = comando.executeQuery();    ) {
+
+            while(resultados.next()){
+                Long id = resultados.getLong("id");
+                String nombre = resultados.getString("nombre");
+                String apellidoPaterno = resultados.getString("apellidoPaterno");
+                String apellidoMaterno = resultados.getString("apellidoMaterno");
+                String fechaNacimiento = resultados.getString("fechaNacimiento");
+                String calle = resultados.getString("calle");
+                String colonia = resultados.getString("colonia");
+                String numInterior = resultados.getString("numInterior");
+                String numExterior = resultados.getString("numExterior");
+                String codigoPostal = resultados.getString("codigoPostal");
+                Cliente cliente = new Cliente (id, 
+                                                nombre, 
+                                                apellidoPaterno, 
+                                                apellidoMaterno, 
+                                                fechaNacimiento, 
+                                                calle, 
+                                                colonia, 
+                                                numInterior, 
+                                                numExterior, 
+                                                codigoPostal);
+                listaClientes.add(cliente);
+            }
+            return listaClientes;
+            
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "No se pudo consultar los clientes", ex);
+            throw new PersistenciaException("No se pudo consultar los clientes",ex);
+        } 
     }
 }

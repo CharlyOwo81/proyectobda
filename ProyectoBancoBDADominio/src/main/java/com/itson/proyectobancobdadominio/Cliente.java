@@ -1,7 +1,7 @@
 
 package com.itson.proyectobancobdadominio;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -13,7 +13,7 @@ public class Cliente {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String colonia;
     private String calle;
     private String numExterior;
@@ -23,14 +23,14 @@ public class Cliente {
     
     public Cliente(){}
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
+    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -75,11 +75,11 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

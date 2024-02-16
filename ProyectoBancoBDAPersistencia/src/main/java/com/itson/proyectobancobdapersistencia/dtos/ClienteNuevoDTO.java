@@ -19,7 +19,7 @@ public class ClienteNuevoDTO {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     
     //ATRIBUTOS - DATOS DOMICILIARIOS
     private String colonia;
@@ -58,11 +58,11 @@ public class ClienteNuevoDTO {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

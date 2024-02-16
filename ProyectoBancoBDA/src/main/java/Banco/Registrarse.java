@@ -4,6 +4,12 @@
  */
 package Banco;
 
+import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
+import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
+import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Oley
@@ -13,11 +19,71 @@ public class Registrarse extends java.awt.Frame {
     /**
      * Creates new form Registrarse
      */
-    public Registrarse() {
+    private final IClientesDAO clientesDAO;
+    
+    public Registrarse(IClientesDAO clientesDAO) {
         initComponents();
-        
+        this.clientesDAO = clientesDAO;
     }
+    
+    private void guardar(){
+        
+        String nombre = txtNombre.getText();
+        String apellidoPaterno = txtApellidoPaterno.getText();
+        String apellidoMaterno = txtApellidoMaterno.getText();
+        String fechaNacimiento = txtFechaNacimiento.getText();
+        String calle = txtCalle.getText();
+        String colonia = txtColonia.getText();
+        String numInterior = txtNumInterior.getText();
+        String numExterior = txtNumExterior.getText();
+        String codigoPostal = txtCodigoPostal.getText();    
+        
+        ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
+        
+        clienteNuevo.setNombre(nombre);
+        clienteNuevo.setApellidoPaterno(apellidoPaterno);
+        clienteNuevo.setApellidoMaterno(apellidoMaterno);
+        clienteNuevo.setFechaNacimiento(fechaNacimiento);
+        clienteNuevo.setCalle(calle);
+        clienteNuevo.setColonia(colonia);
+        clienteNuevo.setNumInterior(numInterior);
+        clienteNuevo.setNumExterior(numExterior);
+        clienteNuevo.setCodigoPostal(codigoPostal);
 
+        try {
+            clienteNuevo.esValido();
+            this.clientesDAO.agregar(clienteNuevo);
+        } catch (ValidacionDTOException ex) {
+            JOptionPane.showMessageDialog(this, 
+                                            ex.getMessage(), 
+                                            "Error de Validación", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }catch(PersistenciaException ex){
+           JOptionPane.showMessageDialog(this,
+                                            "No fue posible agregar al socio", 
+                                            "Error de Almacenamiento",
+                                            JOptionPane.ERROR_MESSAGE);  
+        }
+        
+        //Obtener datos del form
+        
+        //Encapsularlos
+        //Validarlos
+        //Mandarlos a la DAO
+        //Segun resultado le notificamos al usuario
+    }
+    
+    private void limpiar(){
+        txtNombre.setText("");
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        txtFechaNacimiento.setText("");
+        txtCalle.setText("");
+        txtColonia.setText("");
+        txtNumInterior.setText("");
+        txtNumExterior.setText("");
+        txtCodigoPostal.setText("");
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,8 +101,7 @@ public class Registrarse extends java.awt.Frame {
         Fecha = new javax.swing.JLabel();
         txtNumInterior = new javax.swing.JTextField();
         Contraseña = new javax.swing.JLabel();
-        enviar = new javax.swing.JButton();
-        Regresar = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         txtApellidoPaterno = new javax.swing.JTextField();
         Nombre1 = new javax.swing.JLabel();
         txtApellidoMaterno = new javax.swing.JTextField();
@@ -49,7 +114,9 @@ public class Registrarse extends java.awt.Frame {
         Fecha1 = new javax.swing.JLabel();
         txtNumExterior = new javax.swing.JTextField();
         Nombre3 = new javax.swing.JLabel();
-        ftxtFechaNacimiento = new javax.swing.JFormattedTextField();
+        btnRegresar1 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        txtFechaNacimiento = new javax.swing.JTextField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -76,16 +143,13 @@ public class Registrarse extends java.awt.Frame {
         Contraseña.setText("Código Postal:");
         add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
-        enviar.setText("Enviar");
-        add(enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
-
-        Regresar.setText("Regresar");
-        Regresar.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegresarActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        add(Regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
+        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
         add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 150, 20));
 
         Nombre1.setText("Apellido Paterno:");
@@ -113,13 +177,22 @@ public class Registrarse extends java.awt.Frame {
         Nombre3.setText("Apellido Materno:");
         add(Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        ftxtFechaNacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        ftxtFechaNacimiento.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar1.setText("Regresar");
+        btnRegresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ftxtFechaNacimientoActionPerformed(evt);
+                btnRegresar1ActionPerformed(evt);
             }
         });
-        add(ftxtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 130, -1));
+        add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+        add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,26 +204,19 @@ public class Registrarse extends java.awt.Frame {
         System.exit(0);
     }//GEN-LAST:event_exitForm
 
-    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
-Login login = new Login();
-    login.setVisible(true);
-    dispose();    }//GEN-LAST:event_RegresarActionPerformed
-
-    private void ftxtFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtFechaNacimientoActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ftxtFechaNacimientoActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Registrarse().setVisible(true);
-            }
-        });
-    }
+    private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresar1ActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Contraseña;
@@ -163,9 +229,9 @@ Login login = new Login();
     private javax.swing.JLabel Nombre2;
     private javax.swing.JLabel Nombre3;
     private javax.swing.JLabel Registro1;
-    private javax.swing.JButton Regresar;
-    private javax.swing.JButton enviar;
-    private javax.swing.JFormattedTextField ftxtFechaNacimiento;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegresar1;
     private javax.swing.JLabel lblDatosPersonales;
     private javax.swing.JLabel lblDatosPersonales1;
     private javax.swing.JTextField txtApellidoMaterno;
@@ -173,6 +239,7 @@ Login login = new Login();
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
+    private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumExterior;
     private javax.swing.JTextField txtNumInterior;
