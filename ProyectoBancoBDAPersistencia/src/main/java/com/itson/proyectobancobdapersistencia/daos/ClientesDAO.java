@@ -29,7 +29,11 @@ public class ClientesDAO implements IClientesDAO {
 
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sentenciaSQL = """
+         INSERT INTO socios (nombre, telefono,correo)
+         VALUES (?,?,?);
+         """;
+
     }
 
     @Override
