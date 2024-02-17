@@ -18,6 +18,15 @@ import java.util.regex.Pattern;
  */
 public class ClienteNuevoDTO {
     //ATRIBUTOS - DATOS PERSONALES
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -29,11 +38,13 @@ public class ClienteNuevoDTO {
     private String numExterior;
     private String numInterior;
     private String codigoPostal;
+    private String usuarioCliente;
+    private String contraseniaCliente;
     
     //ATRIBUTOS - VALIDACIONES
     private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
     private String validadorNumerico = "^[0-9]+$";
-    private String validadorFechas = "\"^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$\"";
+    private String validadorFechas = "^\\d{4}-\\d{2}-\\d{2}$";
     private Pattern patron;
     private Matcher coincidencia;
 
@@ -85,6 +96,22 @@ public class ClienteNuevoDTO {
         this.calle = calle;
     }
 
+    public String getUsuarioCliente() {
+        return usuarioCliente;
+    }
+
+    public void setUsuarioCliente(String usuarioCliente) {
+        this.usuarioCliente = usuarioCliente;
+    }
+
+    public String getContraseniaCliente() {
+        return contraseniaCliente;
+    }
+
+    public void setContraseniaCliente(String contraseniaCliente) {
+        this.contraseniaCliente = contraseniaCliente;
+    }
+
     public String getNumExterior() {
         return numExterior;
     }
@@ -114,7 +141,7 @@ public class ClienteNuevoDTO {
             validarNombre();
             validarApellidoPaterno();
             validarApellidoMaterno();
-            validarFechaNacimiento();
+            //validarFechaNacimiento();
             validarColonia();
             validarCalle();
             validarCodigoPostal();
@@ -145,13 +172,6 @@ public class ClienteNuevoDTO {
             throw new ValidacionDTOException("Apellido Materno de cliente inválido");
         }
         validarExpresionRegular(apellidoMaterno, "Apellido Materno de cliente inválido");
-    }
-
-    private void validarFechaNacimiento() throws ValidacionDTOException{
-        if (fechaNacimiento == null || fechaNacimiento.isBlank()) {
-            throw new ValidacionDTOException("Fecha de Nacimiento inválida");
-        }
-        validarFechas(fechaNacimiento, "Fecha de Nacimiento inválida");
     }
     
     private void validarCalle() throws ValidacionDTOException {

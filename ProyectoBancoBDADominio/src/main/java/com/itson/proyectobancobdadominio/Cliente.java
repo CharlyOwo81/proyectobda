@@ -19,6 +19,24 @@ public class Cliente {
     private String numExterior;
     private String numInterior;
     private String codigoPostal;
+    private String usuarioCliente;
+    private String contraseniaCliente;
+
+    public String getUsuarioCliente() {
+        return usuarioCliente;
+    }
+
+    public void setUsuarioCliente(String usuarioCliente) {
+        this.usuarioCliente = usuarioCliente;
+    }
+
+    public String getContraseniaCliente() {
+        return contraseniaCliente;
+    }
+
+    public void setContraseniaCliente(String contraseniaCliente) {
+        this.contraseniaCliente = contraseniaCliente;
+    }
 
     
     public Cliente(){}
@@ -30,18 +48,23 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
+    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String calle, String colonia, String numInterior, String numExterior, String codigoPostal, String usuarioCliente, String contraseniaCliente) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.colonia = colonia;
         this.calle = calle;
-        this.numExterior = numExterior;
+        this.colonia = colonia;
         this.numInterior = numInterior;
+        this.numExterior = numExterior;
         this.codigoPostal = codigoPostal;
+        this.usuarioCliente = usuarioCliente;
+        this.contraseniaCliente = contraseniaCliente;
     }
+
+
+
 
     public long getId() {
         return id;
@@ -122,27 +145,6 @@ public class Cliente {
     public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
-
-    
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.nombre);
-        hash = 47 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 47 * hash + Objects.hashCode(this.fechaNacimiento);
-        hash = 47 * hash + Objects.hashCode(this.colonia);
-        hash = 47 * hash + Objects.hashCode(this.calle);
-        hash = 47 * hash + Objects.hashCode(this.codigoPostal);
-        hash = 47 * hash + Objects.hashCode(this.numInterior);
-        hash = 47 * hash + Objects.hashCode(this.numExterior);
-        return hash;
-    }
-    
     
     @Override
     public boolean equals(Object obj) {
@@ -173,9 +175,32 @@ public class Cliente {
         sb.append(", numExterior=").append(numExterior);
         sb.append(", numInterior=").append(numInterior);
         sb.append(", codigoPostal=").append(codigoPostal);
+        sb.append(", usuarioCliente=").append(usuarioCliente);
+        sb.append(", contraseniaCliente=").append(contraseniaCliente);
         sb.append('}');
         return sb.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.nombre);
+        hash = 97 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 97 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 97 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 97 * hash + Objects.hashCode(this.colonia);
+        hash = 97 * hash + Objects.hashCode(this.calle);
+        hash = 97 * hash + Objects.hashCode(this.numExterior);
+        hash = 97 * hash + Objects.hashCode(this.numInterior);
+        hash = 97 * hash + Objects.hashCode(this.codigoPostal);
+        hash = 97 * hash + Objects.hashCode(this.usuarioCliente);
+        hash = 97 * hash + Objects.hashCode(this.contraseniaCliente);
+        return hash;
+    }
+
+    
+
     
     
 }

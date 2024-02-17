@@ -1,5 +1,6 @@
-/home/gamaliel/NetBeansProjects/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/ProyectoBancoBDA.java
-/home/gamaliel/NetBeansProjects/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/Login.java
-/home/gamaliel/NetBeansProjects/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/MisTarjetas.java
-/home/gamaliel/NetBeansProjects/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/Registrarse.java
-/home/gamaliel/NetBeansProjects/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/InterfazInicioSesion.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/RegistroForm.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/ProyectoBancoBDA.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/MisCuentasForm.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/MenuPrincipalForm.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/InicioSesionForm.java
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java/com/itson/proyectobancobda/CuentaNuevaForm.java

@@ -4,7 +4,6 @@
  */
 package com.itson.proyectobancobda;
 
-import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
@@ -55,6 +54,8 @@ public class RegistroForm extends java.awt.Frame {
         String numInterior = txtNumInterior.getText();
         String numExterior = txtNumExterior.getText();
         String codigoPostal = txtCodigoPostal.getText();    
+        String usuarioCliente = txtUsuario.getText();    
+        String contraseniaCliente = txtPassword.getText();    
        
         ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
         
@@ -67,6 +68,8 @@ public class RegistroForm extends java.awt.Frame {
         clienteNuevo.setNumInterior(numInterior);
         clienteNuevo.setNumExterior(numExterior);
         clienteNuevo.setCodigoPostal(codigoPostal);
+        clienteNuevo.setUsuarioCliente(usuarioCliente);
+        clienteNuevo.setContraseniaCliente(contraseniaCliente);
 
         try {
             clienteNuevo.esValido();
@@ -137,6 +140,10 @@ public class RegistroForm extends java.awt.Frame {
         btnLimpiar = new javax.swing.JButton();
         txtFechaNacimiento = new javax.swing.JTextField();
         lblAviso = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        Nombre4 = new javax.swing.JLabel();
+        Nombre5 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -146,22 +153,22 @@ public class RegistroForm extends java.awt.Frame {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDatosPersonales.setText("DATOS DOMICILIARIOS");
-        add(lblDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
+        add(lblDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
 
         Nombre.setText("Nombre:");
         add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
         add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 110, 20));
 
         Direccion.setText("Calle:");
-        add(Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-        add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 160, -1));
+        add(Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
+        add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 160, -1));
 
         Fecha.setText("Numero interior:");
-        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
-        add(txtNumInterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 90, -1));
+        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        add(txtNumInterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 90, -1));
 
         Contraseña.setText("Código Postal:");
-        add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,15 +176,15 @@ public class RegistroForm extends java.awt.Frame {
                 btnEnviarActionPerformed(evt);
             }
         });
-        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
+        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, -1, -1));
         add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 150, 20));
 
         Nombre1.setText("Apellido Paterno:");
         add(Nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
         add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 150, 20));
 
-        Nombre2.setText("Fecha de Nacimiento:");
-        add(Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        Nombre2.setText("Contraseña:");
+        add(Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
 
         Registro1.setText("Registro");
         add(Registro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
@@ -186,13 +193,13 @@ public class RegistroForm extends java.awt.Frame {
         add(lblDatosPersonales1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
 
         Direccion1.setText("Colonia:");
-        add(Direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
-        add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 160, -1));
-        add(txtCodigoPostal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 100, -1));
+        add(Direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, -1, -1));
+        add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 160, -1));
+        add(txtCodigoPostal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 100, -1));
 
         Fecha1.setText("Numero exterior:");
-        add(Fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
-        add(txtNumExterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 90, -1));
+        add(Fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, -1));
+        add(txtNumExterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 90, -1));
 
         Nombre3.setText("Apellido Materno:");
         add(Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
@@ -203,7 +210,7 @@ public class RegistroForm extends java.awt.Frame {
                 btnRegresar1ActionPerformed(evt);
             }
         });
-        add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+        add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, -1, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,11 +218,19 @@ public class RegistroForm extends java.awt.Frame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, -1, -1));
         add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, -1));
 
         lblAviso.setText("En formato dd/mm/yyyy");
         add(lblAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, -1));
+        add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 150, -1));
+
+        Nombre4.setText("Fecha de Nacimiento:");
+        add(Nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        Nombre5.setText("Usuario:");
+        add(Nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,6 +266,8 @@ public class RegistroForm extends java.awt.Frame {
     private javax.swing.JLabel Nombre1;
     private javax.swing.JLabel Nombre2;
     private javax.swing.JLabel Nombre3;
+    private javax.swing.JLabel Nombre4;
+    private javax.swing.JLabel Nombre5;
     private javax.swing.JLabel Registro1;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpiar;
@@ -267,5 +284,7 @@ public class RegistroForm extends java.awt.Frame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumExterior;
     private javax.swing.JTextField txtNumInterior;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,7 +32,7 @@ public class ClientesDAO implements IClientesDAO {
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String clienteNuevoSQL = """
-                INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal)
+                INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal, usuario_cliente, contrasenia_cliente)
                 VALUES (?,?,?,?,?,?,?,?,?);
                 """;
         try (
@@ -48,6 +48,8 @@ public class ClientesDAO implements IClientesDAO {
             comando.setString(7, clienteNuevo.getNumInterior());
             comando.setString(8, clienteNuevo.getNumExterior());
             comando.setString(9, clienteNuevo.getCodigoPostal());
+            comando.setString(10, clienteNuevo.getUsuarioCliente());
+            comando.setString(11, clienteNuevo.getContraseniaCliente());
 
             int numeroRegistrosInsertados = comando.executeUpdate();
 
@@ -65,7 +67,9 @@ public class ClientesDAO implements IClientesDAO {
                     clienteNuevo.getColonia(),
                     clienteNuevo.getNumInterior(),
                     clienteNuevo.getNumExterior(),
-                    clienteNuevo.getCodigoPostal());
+                    clienteNuevo.getCodigoPostal(),
+                    clienteNuevo.getUsuarioCliente(),
+                    clienteNuevo.getContraseniaCliente());
             return cliente;
             
         } catch (SQLException ex) {
@@ -98,6 +102,8 @@ public class ClientesDAO implements IClientesDAO {
                 String numInterior = resultados.getString("numInterior");
                 String numExterior = resultados.getString("numExterior");
                 String codigoPostal = resultados.getString("codigoPostal");
+                String usuario = resultados.getString("usuario");
+                String contrasenia = resultados.getString("contrasenia");
                 Cliente cliente = new Cliente (id, 
                                                 nombre, 
                                                 apellidoPaterno, 
@@ -107,7 +113,9 @@ public class ClientesDAO implements IClientesDAO {
                                                 colonia, 
                                                 numInterior, 
                                                 numExterior, 
-                                                codigoPostal);
+                                                codigoPostal,
+                                                usuario,
+                                                contrasenia);
                 listaClientes.add(cliente);
             }
             return listaClientes;
