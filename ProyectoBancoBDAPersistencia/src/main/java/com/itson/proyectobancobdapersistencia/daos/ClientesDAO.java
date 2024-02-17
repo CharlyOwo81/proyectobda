@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,8 +31,8 @@ public class ClientesDAO implements IClientesDAO {
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String clienteNuevoSQL = """
-                INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal, usuario_cliente, contrasenia_cliente)
-                VALUES (?,?,?,?,?,?,?,?,?);
+                INSERT INTO clientes (nombre, apellido_paterno, apellido_materno, fecha_nacimiento, calle, colonia, numero_interior, numero_exterior, codigo_postal, correo_cliente, contrasenia_cliente)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?);
                 """;
         try (
             Connection conexion = this.conexionBD.obtenerConexion(); 
@@ -48,8 +47,8 @@ public class ClientesDAO implements IClientesDAO {
             comando.setString(7, clienteNuevo.getNumInterior());
             comando.setString(8, clienteNuevo.getNumExterior());
             comando.setString(9, clienteNuevo.getCodigoPostal());
-            comando.setString(10, clienteNuevo.getUsuarioCliente());
-            comando.setString(11, clienteNuevo.getContraseniaCliente());
+            comando.setString(10, clienteNuevo.getCorreo());
+            comando.setString(11, clienteNuevo.getContrasenia());
 
             int numeroRegistrosInsertados = comando.executeUpdate();
 
@@ -68,8 +67,8 @@ public class ClientesDAO implements IClientesDAO {
                     clienteNuevo.getNumInterior(),
                     clienteNuevo.getNumExterior(),
                     clienteNuevo.getCodigoPostal(),
-                    clienteNuevo.getUsuarioCliente(),
-                    clienteNuevo.getContraseniaCliente());
+                    clienteNuevo.getCorreo(),
+                    clienteNuevo.getContrasenia());
             return cliente;
             
         } catch (SQLException ex) {
@@ -102,8 +101,6 @@ public class ClientesDAO implements IClientesDAO {
                 String numInterior = resultados.getString("numInterior");
                 String numExterior = resultados.getString("numExterior");
                 String codigoPostal = resultados.getString("codigoPostal");
-                String usuario = resultados.getString("usuario");
-                String contrasenia = resultados.getString("contrasenia");
                 Cliente cliente = new Cliente (id, 
                                                 nombre, 
                                                 apellidoPaterno, 
@@ -113,9 +110,7 @@ public class ClientesDAO implements IClientesDAO {
                                                 colonia, 
                                                 numInterior, 
                                                 numExterior, 
-                                                codigoPostal,
-                                                usuario,
-                                                contrasenia);
+                                                codigoPostal);
                 listaClientes.add(cliente);
             }
             return listaClientes;

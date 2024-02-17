@@ -18,15 +18,6 @@ import java.util.regex.Pattern;
  */
 public class ClienteNuevoDTO {
     //ATRIBUTOS - DATOS PERSONALES
-    private long id;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -38,8 +29,24 @@ public class ClienteNuevoDTO {
     private String numExterior;
     private String numInterior;
     private String codigoPostal;
-    private String usuarioCliente;
-    private String contraseniaCliente;
+    private String correo;
+    private String contrasenia;
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
     //ATRIBUTOS - VALIDACIONES
     private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
@@ -96,22 +103,6 @@ public class ClienteNuevoDTO {
         this.calle = calle;
     }
 
-    public String getUsuarioCliente() {
-        return usuarioCliente;
-    }
-
-    public void setUsuarioCliente(String usuarioCliente) {
-        this.usuarioCliente = usuarioCliente;
-    }
-
-    public String getContraseniaCliente() {
-        return contraseniaCliente;
-    }
-
-    public void setContraseniaCliente(String contraseniaCliente) {
-        this.contraseniaCliente = contraseniaCliente;
-    }
-
     public String getNumExterior() {
         return numExterior;
     }
@@ -141,7 +132,7 @@ public class ClienteNuevoDTO {
             validarNombre();
             validarApellidoPaterno();
             validarApellidoMaterno();
-            //validarFechaNacimiento();
+            validarFechaNacimiento();
             validarColonia();
             validarCalle();
             validarCodigoPostal();
@@ -172,6 +163,13 @@ public class ClienteNuevoDTO {
             throw new ValidacionDTOException("Apellido Materno de cliente inválido");
         }
         validarExpresionRegular(apellidoMaterno, "Apellido Materno de cliente inválido");
+    }
+
+    private void validarFechaNacimiento() throws ValidacionDTOException{
+        if (fechaNacimiento == null || fechaNacimiento.isBlank()) {
+            throw new ValidacionDTOException("Fecha de Nacimiento inválida");
+        }
+        validarFechas(fechaNacimiento, "Fecha de Nacimiento inválida");
     }
     
     private void validarCalle() throws ValidacionDTOException {
