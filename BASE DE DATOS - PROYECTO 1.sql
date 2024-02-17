@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`clientes` (
   `numero_interior` VARCHAR(5) NULL DEFAULT NULL,
   `numero_exterior` VARCHAR(10) NULL DEFAULT '0',
   `codigo_postal` VARCHAR(5) NOT NULL,
-  `usuario_cliente` VARCHAR(45) NOT NULL,
+  `correo_cliente` VARCHAR(250) NOT NULL,
   `contrasenia_cliente` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id_cliente`))
 ENGINE = InnoDB
