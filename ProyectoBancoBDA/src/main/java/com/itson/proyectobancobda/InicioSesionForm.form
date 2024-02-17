@@ -35,12 +35,12 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Contraseña" max="32767" attributes="0"/>
+                              <Component id="txtContrasenia" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Nombre" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Component id="txtNombreUsuario" min="-2" pref="151" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -53,7 +53,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="Conti" min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="btnContinuar" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -66,16 +66,16 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Contraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="85" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Conti" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnContinuar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Regresar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -99,16 +99,16 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="Nombre">
+    <Component class="javax.swing.JTextField" name="txtNombreUsuario">
     </Component>
-    <Component class="javax.swing.JTextField" name="Contrase&#xf1;a">
+    <Component class="javax.swing.JTextField" name="txtContrasenia">
     </Component>
-    <Component class="javax.swing.JButton" name="Conti">
+    <Component class="javax.swing.JButton" name="btnContinuar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Continuar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ContiActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContinuarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Regresar">

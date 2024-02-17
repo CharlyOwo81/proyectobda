@@ -15,4 +15,5 @@ import java.util.List;
 public interface IClientesDAO {
     Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException;
     List<Cliente> consultar() throws PersistenciaException;
+    Cliente verificarUsuario(String correo, String contrasenia) throws PersistenciaException;
 }

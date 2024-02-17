@@ -17,7 +17,7 @@ public class Cuenta {
     private Integer num_cuenta;
     private Double saldo_pesos;
     private Date fecha_apertura;
-    private Integer id_cliente;
+    private Long id_cliente;
 
     /**
      * Constructor vacío
@@ -34,7 +34,7 @@ public class Cuenta {
      * @param fecha_apertura Fecha de creación de la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer id, Integer num_cuenta, Double saldo, Date fecha_apertura, Integer id_cliente) {
+    public Cuenta(Integer id, Integer num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
         this.id = id;
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
@@ -50,7 +50,7 @@ public class Cuenta {
      * @param fecha_apertura Fecha de creación de la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo, Date fecha_apertura, Integer id_cliente) {
+    public Cuenta(Integer num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
         this.fecha_apertura = fecha_apertura;
@@ -85,7 +85,7 @@ public class Cuenta {
      * @param saldo Saldo en la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo, Integer id_cliente) {
+    public Cuenta(Integer num_cuenta, Double saldo, Long id_cliente) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
         this.id_cliente = id_cliente;
@@ -124,11 +124,11 @@ public class Cuenta {
         this.fecha_apertura = fecha_apertura;
     }
 
-    public Integer getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 

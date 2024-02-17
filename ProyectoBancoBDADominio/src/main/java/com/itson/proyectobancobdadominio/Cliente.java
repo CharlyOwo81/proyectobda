@@ -19,6 +19,8 @@ public class Cliente {
     private String numExterior;
     private String numInterior;
     private String codigoPostal;
+    private String correo;
+    private String contrasenia;
 
     
     public Cliente(){}
@@ -30,7 +32,7 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
+    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal, String correo, String contrasenia) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -41,8 +43,28 @@ public class Cliente {
         this.numExterior = numExterior;
         this.numInterior = numInterior;
         this.codigoPostal = codigoPostal;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    
+    
     public long getId() {
         return id;
     }
@@ -140,6 +162,8 @@ public class Cliente {
         hash = 47 * hash + Objects.hashCode(this.codigoPostal);
         hash = 47 * hash + Objects.hashCode(this.numInterior);
         hash = 47 * hash + Objects.hashCode(this.numExterior);
+        hash = 47 * hash + Objects.hashCode(this.correo);
+        hash = 47 * hash + Objects.hashCode(this.contrasenia);
         return hash;
     }
     
@@ -173,6 +197,8 @@ public class Cliente {
         sb.append(", numExterior=").append(numExterior);
         sb.append(", numInterior=").append(numInterior);
         sb.append(", codigoPostal=").append(codigoPostal);
+        sb.append(", correo=").append(correo);
+        sb.append(", contrasenia=").append(contrasenia);
         sb.append('}');
         return sb.toString();
     }

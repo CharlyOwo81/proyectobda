@@ -29,11 +29,14 @@ public class ClienteNuevoDTO {
     private String numExterior;
     private String numInterior;
     private String codigoPostal;
-    
+    private String correo;
+    private String contrasenia;
+
     //ATRIBUTOS - VALIDACIONES
     private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
     private String validadorNumerico = "^[0-9]+$";
-    private String validadorFechas = "\"^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$\"";
+    private String validadorFechas = "^\\d{4}-\\d{2}-\\d{2}$";
+    private String validadorCorreos = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private Pattern patron;
     private Matcher coincidencia;
 
@@ -109,17 +112,35 @@ public class ClienteNuevoDTO {
         this.codigoPostal = codigoPostal;
     } 
     
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }    
+    
     public boolean esValido() throws ValidacionDTOException {
         try {
             validarNombre();
             validarApellidoPaterno();
             validarApellidoMaterno();
-            validarFechaNacimiento();
             validarColonia();
             validarCalle();
             validarCodigoPostal();
             validarNumInterior();
             validarNumExterior();
+            validarCorreo();
+            validarContrasenia();
+            validarFechaNacimiento();            
             return true;
         } catch (ValidacionDTOException ex) {
             throw ex;
@@ -187,6 +208,19 @@ public class ClienteNuevoDTO {
             validadorNumerico(codigoPostal, "Código Postal inválido");        
     }
     
+    private void validarCorreo()throws ValidacionDTOException{
+        if (correo == null || correo.isBlank() || correo.trim().length() > 250) {
+            throw new ValidacionDTOException("Correo Electrónico inválido");
+        }
+            validarCorreos(correo, "Correo Electrónico inválido");  
+    }
+    
+    private void validarContrasenia()throws ValidacionDTOException{
+        if (contrasenia == null || contrasenia.isBlank() || contrasenia.trim().length() > 10) {
+            throw new ValidacionDTOException("Contraseña inválido");
+        } 
+    }
+    
     private void validarExpresionRegular(String texto, String mensajeError) throws ValidacionDTOException {
         patron = Pattern.compile(validadorEnEspaniol, Pattern.UNICODE_CHARACTER_CLASS);
         coincidencia = patron.matcher(texto);
@@ -211,4 +245,11 @@ public class ClienteNuevoDTO {
         }
     }
     
+    private void validarCorreos(String texto, String mensajeError) throws ValidacionDTOException{
+        patron = Pattern.compile(validadorCorreos);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
+        }
+    }    
 }
