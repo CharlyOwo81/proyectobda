@@ -32,19 +32,6 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.fechaNacimiento = fechaNacimiento;
-        this.colonia = colonia;
-        this.calle = calle;
-        this.numExterior = numExterior;
-        this.numInterior = numInterior;
-        this.codigoPostal = codigoPostal;
-    }
-
     public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal, String correo, String contrasenia) {
         this.id = id;
         this.nombre = nombre;
@@ -175,6 +162,8 @@ public class Cliente {
         hash = 47 * hash + Objects.hashCode(this.codigoPostal);
         hash = 47 * hash + Objects.hashCode(this.numInterior);
         hash = 47 * hash + Objects.hashCode(this.numExterior);
+        hash = 47 * hash + Objects.hashCode(this.correo);
+        hash = 47 * hash + Objects.hashCode(this.contrasenia);
         return hash;
     }
     
@@ -208,6 +197,8 @@ public class Cliente {
         sb.append(", numExterior=").append(numExterior);
         sb.append(", numInterior=").append(numInterior);
         sb.append(", codigoPostal=").append(codigoPostal);
+        sb.append(", correo=").append(correo);
+        sb.append(", contrasenia=").append(contrasenia);
         sb.append('}');
         return sb.toString();
     }
