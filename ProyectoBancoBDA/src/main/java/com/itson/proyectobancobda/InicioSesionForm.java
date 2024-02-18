@@ -138,6 +138,9 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         verificar();
+        this.setVisible(false);
+        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO);
+        menuPrincipal.setVisible(true);
      }//GEN-LAST:event_btnContinuarActionPerformed
 
 

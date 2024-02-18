@@ -5,21 +5,26 @@
 package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
-import com.itson.proyectobancobdadominio.Cuenta;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
-import com.itson.proyectobancobdapersistencia.daos.ClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.GeneradorCuenta;
 //import com.itson.proyectobancobdapersistencia.daos.GeneradorCuenta;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 //import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
-import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
-import javax.swing.JOptionPane;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
+import java.util.Random;
 
 /**
  *
  * @author gamaliel
  */
 public class CuentaNuevaForm extends javax.swing.JFrame {
+    private final IClientesDAO clientesDAO;
 
+    public CuentaNuevaForm(IClientesDAO clientesDAO) {
+        this.clientesDAO = clientesDAO;
+    }
+    
+    
 
 
 
@@ -39,6 +44,7 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
         txtSaldoPesos = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +54,9 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
 
         btnCrear.setText("Crear");
 
-        btnRegresar.setText("jButton1");
+        btnRegresar.setText("Regresar");
+
+        jLabel3.setText("Crear nueva cuenta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,11 +80,17 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCrear)
                 .addGap(34, 34, 34))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblNumCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -98,6 +112,7 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblNumCuenta;
     private javax.swing.JTextField txtSaldoPesos;
     // End of variables declaration//GEN-END:variables

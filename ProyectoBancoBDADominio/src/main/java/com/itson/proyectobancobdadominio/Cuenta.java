@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class Cuenta {
 
-    private Integer id;
-    private Integer num_cuenta;
+    private Long id;
+    private String num_cuenta;
     private Double saldo_pesos;
     private Date fecha_apertura;
     private Long id_cliente;
@@ -34,7 +34,7 @@ public class Cuenta {
      * @param fecha_apertura Fecha de creación de la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer id, Integer num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
+    public Cuenta(Long id, String num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
         this.id = id;
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
@@ -50,7 +50,7 @@ public class Cuenta {
      * @param fecha_apertura Fecha de creación de la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
+    public Cuenta(String num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
         this.fecha_apertura = fecha_apertura;
@@ -63,7 +63,7 @@ public class Cuenta {
      * @param saldo Saldo en la cuenta
      * @param fecha_apertura Fecha de creación de la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo, Date fecha_apertura) {
+    public Cuenta(String num_cuenta, Double saldo, Date fecha_apertura) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
         this.fecha_apertura = fecha_apertura;
@@ -74,7 +74,7 @@ public class Cuenta {
      * @param num_cuenta Numero de cuenta
      * @param saldo Saldo en la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo) {
+    public Cuenta(String num_cuenta, Double saldo) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
     }
@@ -85,26 +85,26 @@ public class Cuenta {
      * @param saldo Saldo en la cuenta
      * @param id_cliente ID del dueño de la cuenta
      */
-    public Cuenta(Integer num_cuenta, Double saldo, Long id_cliente) {
+    public Cuenta(String num_cuenta, Double saldo, Long id_cliente) {
         this.num_cuenta = num_cuenta;
         this.saldo_pesos = saldo;
         this.id_cliente = id_cliente;
     }
 
    
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Integer getNum_cuenta() {
+    public String getNum_cuenta() {
         return num_cuenta;
     }
 
-    public void setNum_cuenta(Integer num_cuenta) {
+    public void setNum_cuenta(String num_cuenta) {
         this.num_cuenta = num_cuenta;
     }
 
@@ -156,6 +156,15 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "" + num_cuenta;
-    }    
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cuenta{");
+        sb.append(", num_cuenta=").append(num_cuenta);
+        sb.append(", saldo_pesos=").append(saldo_pesos);
+        sb.append(", fecha_apertura=").append(fecha_apertura);
+        sb.append(", id_cliente=").append(id_cliente);
+        sb.append('}');
+        return sb.toString();
+    }
+
+
 }
