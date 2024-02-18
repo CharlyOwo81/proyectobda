@@ -5,7 +5,10 @@
 package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
+import com.itson.proyectobancobdapersistencia.daos.CuentasDAO;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import javax.swing.JOptionPane;
 
@@ -15,11 +18,24 @@ import javax.swing.JOptionPane;
  */
 public class InicioSesionForm extends javax.swing.JFrame {
 
-    private final IClientesDAO clientesDAO;
+    private final IClientesDAO clientesDAO;  
+//    private final ICuentasDAO cuentasDAO;  
+//    private final IConexion conexion;
+//    private final Cliente cliente;
+//
+//    public InicioSesionForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+//        this.clientesDAO = clientesDAO;
+//        this.cuentasDAO = cuentasDAO;
+//        this.conexion = conexion;
+//        this.cliente = cliente;
+//    }
+
     public InicioSesionForm(IClientesDAO clientesDAO) {
-        initComponents();
-        this.clientesDAO = clientesDAO;        
+                initComponents();
+        this.clientesDAO = clientesDAO;
     }
+    
+    
 
     
         private void verificar(){
@@ -138,9 +154,9 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         verificar();
-        this.setVisible(false);
-        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO);
-        menuPrincipal.setVisible(true);
+//        this.setVisible(false);
+//        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO);
+//        menuPrincipal.setVisible(true);
      }//GEN-LAST:event_btnContinuarActionPerformed
 
 

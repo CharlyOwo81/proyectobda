@@ -4,8 +4,10 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 
 
@@ -15,13 +17,25 @@ import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
  */
 public class MenuPrincipalForm extends javax.swing.JFrame {
 
-
     private final IClientesDAO clientesDAO;
+//    private final ICuentasDAO cuentasDAO;
+//    private final IConexion conexion;
+//    private final Cliente cliente;
 
     public MenuPrincipalForm(IClientesDAO clientesDAO) {
-        this.clientesDAO = clientesDAO;
         initComponents();
+        this.clientesDAO = clientesDAO;
     }
+
+    
+    
+//    public MenuPrincipalForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+//        initComponents();        
+//        this.clientesDAO = clientesDAO;
+//        this.cuentasDAO = cuentasDAO;
+//        this.conexion = conexion;
+//        this.cliente = cliente;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

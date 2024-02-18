@@ -4,7 +4,10 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdadominio.Cliente;
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import com.itson.proyectobancobdapersistencia.dtos.ClienteNuevoDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
@@ -23,11 +26,25 @@ public class RegistroForm extends java.awt.Frame {
      * Creates new form RegistroForm
      */
     private final IClientesDAO clientesDAO;
-    
+
     public RegistroForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
     }
+    
+    
+//    private final ICuentasDAO cuentasDAO;
+//    private final IConexion conexion;
+//    private final Cliente cliente;
+//
+//    public RegistroForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+//        initComponents();        
+//        this.clientesDAO = clientesDAO;
+//        this.cuentasDAO = cuentasDAO;
+//        this.conexion = conexion;
+//        this.cliente = cliente;
+//    }
+    
     
     private void guardar(){
         
