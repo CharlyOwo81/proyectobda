@@ -19,16 +19,16 @@ import javax.swing.JOptionPane;
 public class InicioSesionForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;  
-//    private final ICuentasDAO cuentasDAO;  
-//    private final IConexion conexion;
-//    private final Cliente cliente;
-//
-//    public InicioSesionForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
-//        this.clientesDAO = clientesDAO;
-//        this.cuentasDAO = cuentasDAO;
-//        this.conexion = conexion;
-//        this.cliente = cliente;
-//    }
+    private ICuentasDAO cuentasDAO;  
+    private IConexion conexion;
+    private Cliente cliente;
+
+    public InicioSesionForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+        this.clientesDAO = clientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.conexion = conexion;
+        this.cliente = cliente;
+    }
 
     public InicioSesionForm(IClientesDAO clientesDAO) {
                 initComponents();
@@ -154,9 +154,9 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         verificar();
-//        this.setVisible(false);
-//        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO);
-//        menuPrincipal.setVisible(true);
+        this.setVisible(false);
+        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cuentasDAO, cliente, conexion);
+        menuPrincipal.setVisible(true);
      }//GEN-LAST:event_btnContinuarActionPerformed
 
 

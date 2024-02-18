@@ -1,7 +1,6 @@
 
 package com.itson.proyectobancobdadominio;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -25,13 +24,6 @@ public class Cliente {
     
     public Cliente(){}
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNacimiento, String colonia, String calle, String numExterior, String numInterior, String codigoPostal, String correo, String contrasenia) {
         this.id = id;
         this.nombre = nombre;
@@ -47,24 +39,13 @@ public class Cliente {
         this.contrasenia = contrasenia;
     }
 
-    public String getCorreo() {
-        return correo;
+    public Cliente(long id, String nombre, String apellidoPaterno, String apellidoMaterno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
-    
-    
     public long getId() {
         return id;
     }
@@ -145,7 +126,21 @@ public class Cliente {
         this.codigoPostal = codigoPostal;
     }
 
-    
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
 
     @Override
@@ -201,7 +196,5 @@ public class Cliente {
         sb.append(", contrasenia=").append(contrasenia);
         sb.append('}');
         return sb.toString();
-    }
-    
-    
+    } 
 }

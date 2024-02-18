@@ -29,109 +29,47 @@ public class CuentasDAO implements ICuentasDAO{
 
     public CuentasDAO(IConexion conexion) {
         this.conexionBD = conexion;
-    }
+    }  
 
     @Override
     public Cuenta insertar(Cuenta cuenta) throws PersistenciaException {
-        String cuentaNuevaSQL = "INSERT INTO CUENTAS(num_cuenta,saldo,id_clientes)  VALUES (?,?,?)";
-        
-        try(Connection conexion = this.conexionBD.obtenerConexion();
-                PreparedStatement comando = conexion.prepareStatement(cuentaNuevaSQL, Statement.RETURN_GENERATED_KEYS);
-                )
-        {
-            comando.setString(1, cuenta.getNum_cuenta());
-            comando.setDouble(2, cuenta.getSaldoPesos());
-            comando.setLong(3, cuenta.getId());
-            comando.executeUpdate();
-            ResultSet llavesGeneradas = comando.getGeneratedKeys();
-            
-            if(llavesGeneradas.next()){
-                Integer llavePrimaria = llavesGeneradas.getInt(1);
-                cuenta.setId(llavePrimaria);
-                return cuenta;
-            }
-            throw new PersistenciaException("Cuenta registrada pero ID no generada");
-        }catch(SQLException e){
-            System.err.println(e.getMessage());
-            System.out.println("Cosa123");
-            throw new PersistenciaException("No fue posible registrar la cuenta");
+    String sql = "INSERT INTO cuentas (numero_cuenta, saldo_en_pesos) VALUES (?, ?)";
+    try (Connection con = conexionBD.obtenerConexion();
+         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        ps.setString(1, cuenta.getNumCuenta());
+        ps.setDouble(2, cuenta.getSaldoPesos());
+        ps.setDate(3, cuenta.getFechaApertura());
+        int affectedRows = ps.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Fallo al insertar la cuenta, no se afectaron filas.");
         }
+
+        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                cuenta.setId(generatedKeys.getLong(1));
+            } else {
+                throw new SQLException("Fallo al insertar la cuenta, no se obtuvo el ID generado.");
+            }
+        }
+    } catch (SQLException ex) {
+        throw new PersistenciaException("Error al insertar la cuenta", ex);
+    }
+    return cuenta;
     }
 
     @Override
     public List<Cuenta> consultar(ConfiguracionPaginado configPaginado, Cliente cliente) throws PersistenciaException {
-        String consultarCuentaSQL = "SELECT num_cuenta,saldo,fecha_apertura FROM cuentas WHERE id_clientes=? LIMIT ? OFFSET ?";
-        List<Cuenta> listaCuentas = new LinkedList<>();
-        try (
-                Connection conexion = this.conexionBD.obtenerConexion();
-                PreparedStatement comando = conexion.prepareStatement(consultarCuentaSQL);) {
-
-            comando.setLong(1, cliente.getId());
-            comando.setInt(2, configPaginado.getElementosASaltar());
-            comando.setInt(3, configPaginado.getPagina());
-            ResultSet resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-                String num_cuenta = resultado.getString("num_cuenta");
-                Double saldo = resultado.getDouble("saldo");
-                Date fecha_apertura = resultado.getDate("fecha_apertura");
-                Cuenta cuenta = new Cuenta(num_cuenta,saldo,fecha_apertura);
-                listaCuentas.add(cuenta);
-            }
-
-            return listaCuentas;
-        } catch (SQLException ex) {
-            throw new PersistenciaException("No fue posible consultar la lista de cuentas");
-        }
-
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Cuenta> consultarLista(Cliente cliente) throws PersistenciaException {
-        String consultarListaSQL = "SELECT num_cuenta,saldo FROM cuentas WHERE id_clientes=?";
-        List<Cuenta> listaCuentas = new LinkedList<>();
-        try (
-                Connection conexion = this.conexionBD.obtenerConexion();
-                PreparedStatement comando = conexion.prepareStatement(consultarListaSQL);) {
-
-            comando.setLong(1, cliente.getId());
-            ResultSet resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-                String num_cuenta = resultado.getString("num_cuenta");
-                Double saldo = resultado.getDouble("saldo");
-                Cuenta cuenta = new Cuenta(num_cuenta,saldo);
-                listaCuentas.add(cuenta);
-            }
-
-            return listaCuentas;
-        } catch (SQLException ex) {
-            throw new PersistenciaException("No fue posible consultar la lista de cuentas");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Cuenta actualizar(Cuenta cuenta) throws PersistenciaException {
-        String codigoSQL = "UPDATE CUENTAS SET SALDO=SALDO+? WHERE NUM_CUENTA=?";
-        
-        try(
-            Connection conexion = this.conexionBD.obtenerConexion();
-            PreparedStatement comando = conexion.prepareStatement(codigoSQL);
-            )
-        {
-            comando.setDouble(1,cuenta.getSaldoPesos());
-            comando.setString(2, cuenta.getNum_cuenta());
-            ResultSet resultado = comando.executeQuery();
-            comando.executeUpdate();
-            if(resultado.next()){
-                Double saldo = resultado.getDouble("saldo");
-                String num_cuenta = resultado.getString("num_cuenta");
-                cuenta = new Cuenta(num_cuenta,saldo);
-            }
-            return cuenta;
-        }catch(SQLException ex){
-            return null;
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
 }

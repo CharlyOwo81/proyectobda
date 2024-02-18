@@ -20,9 +20,9 @@ import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
-    private final ICuentasDAO cuentasDAO;
-    private final IConexion conexion;
-    private final Cliente cliente;
+    private ICuentasDAO cuentasDAO;
+    private IConexion conexion;
+    private Cliente cliente;
     /**
      * Creates new form MenuClienteForm
      */
@@ -33,9 +33,12 @@ public class MenuClienteForm extends javax.swing.JFrame {
         this.cuentasDAO = cuentasDAO;
         this.cliente = cliente;
         this.conexion =conexion;
-        lblInicioMenuCliente.setText("Bienvenid@ "+cliente.getNombre());
     }
 
+    protected Cliente getCliente (){
+        return cliente;
+    }    
+      
     private void crearCuenta(){
 
     }
@@ -123,10 +126,12 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
         this.setVisible(false);
-        MisCuentasForm menuPrincipal = new MisCuentasForm();
+        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO, cuentasDAO, conexion, cliente);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
+  
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAñadirSaldo;

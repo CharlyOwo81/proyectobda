@@ -14,10 +14,10 @@ import java.util.Objects;
 public class Cuenta {
 
     private Long id;
-    private String num_cuenta;
-    private Double saldo_pesos;
-    private Date fecha_apertura;
-    private Long id_cliente;
+    private String numCuenta;
+    private Double saldoPesos;
+    private Date fechaApertura;
+    private Long idCliente;
 
     /**
      * Constructor vacío
@@ -25,117 +25,84 @@ public class Cuenta {
     public Cuenta() {
     }
 
-    /**
-     * Constructor por defecto
-     *
-     * @param id ID de la cuenta
-     * @param num_cuenta Numero de cuenta
-     * @param saldo Saldo en la cuenta
-     * @param fecha_apertura Fecha de creación de la cuenta
-     * @param id_cliente ID del dueño de la cuenta
-     */
-    public Cuenta(Long id, String num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
+    public Cuenta(Long id, String numCuenta, Double saldoPesos, Date fechaApertura, Long idCliente) {
         this.id = id;
-        this.num_cuenta = num_cuenta;
-        this.saldo_pesos = saldo;
-        this.fecha_apertura = fecha_apertura;
-        this.id_cliente = id_cliente;
+        this.numCuenta = numCuenta;
+        this.saldoPesos = saldoPesos;
+        this.fechaApertura = fechaApertura;
+        this.idCliente = idCliente;
     }
 
-    /**
-     * Constructor sin ID
-     *
-     * @param num_cuenta Numero de cuenta
-     * @param saldo Saldo en la cuenta
-     * @param fecha_apertura Fecha de creación de la cuenta
-     * @param id_cliente ID del dueño de la cuenta
-     */
-    public Cuenta(String num_cuenta, Double saldo, Date fecha_apertura, Long id_cliente) {
-        this.num_cuenta = num_cuenta;
-        this.saldo_pesos = saldo;
-        this.fecha_apertura = fecha_apertura;
-        this.id_cliente = id_cliente;
+    public Cuenta(String numCuenta, Double saldoPesos, Date fechaApertura, Long idCliente) {
+        this.numCuenta = numCuenta;
+        this.saldoPesos = saldoPesos;
+        this.fechaApertura = fechaApertura;
+        this.idCliente = idCliente;
     }
 
-    /**
-     * Constructor sin ID del cliente
-     * @param num_cuenta Numero de cuenta
-     * @param saldo Saldo en la cuenta
-     * @param fecha_apertura Fecha de creación de la cuenta
-     */
-    public Cuenta(String num_cuenta, Double saldo, Date fecha_apertura) {
-        this.num_cuenta = num_cuenta;
-        this.saldo_pesos = saldo;
-        this.fecha_apertura = fecha_apertura;
+    public Cuenta(String numCuenta, Double saldoPesos, Date fechaApertura) {
+        this.numCuenta = numCuenta;
+        this.saldoPesos = saldoPesos;
+        this.fechaApertura = fechaApertura;
     }
 
-    /**
-     * Constructor con el número de cuenta y saldo_pesos
-     * @param num_cuenta Numero de cuenta
-     * @param saldo Saldo en la cuenta
-     */
-    public Cuenta(String num_cuenta, Double saldo) {
-        this.num_cuenta = num_cuenta;
-        this.saldo_pesos = saldo;
+    public Cuenta(String numCuenta, Double saldoPesos) {
+        this.numCuenta = numCuenta;
+        this.saldoPesos = saldoPesos;
     }
 
-    /**
-     * Constructor con ID del cliente
-     * @param num_cuenta Numero de cuenta
-     * @param saldo Saldo en la cuenta
-     * @param id_cliente ID del dueño de la cuenta
-     */
-    public Cuenta(String num_cuenta, Double saldo, Long id_cliente) {
-        this.num_cuenta = num_cuenta;
-        this.saldo_pesos = saldo;
-        this.id_cliente = id_cliente;
+    public Cuenta(String numCuenta, Double saldoPesos, Long idCliente) {
+        this.numCuenta = numCuenta;
+        this.saldoPesos = saldoPesos;
+        this.idCliente = idCliente;
     }
 
-   
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNum_cuenta() {
-        return num_cuenta;
+    public String getNumCuenta() {
+        return numCuenta;
     }
 
-    public void setNum_cuenta(String num_cuenta) {
-        this.num_cuenta = num_cuenta;
+    public void setNumCuenta(String numCuenta) {
+        this.numCuenta = numCuenta;
     }
 
     public Double getSaldoPesos() {
-        return saldo_pesos;
+        return saldoPesos;
     }
 
-    public void setSaldoPesos(Double saldo_pesos) {
-        this.saldo_pesos = saldo_pesos;
+    public void setSaldoPesos(Double saldoPesos) {
+        this.saldoPesos = saldoPesos;
     }
 
-    public Date getFecha_apertura() {
-        return fecha_apertura;
+    public Date getFechaApertura() {
+        return fechaApertura;
     }
 
-    public void setFecha_apertura(Date fecha_apertura) {
-        this.fecha_apertura = fecha_apertura;
+    public void setFechaApertura(Date fechaApertura) {
+        this.fechaApertura = fechaApertura;
     }
 
-    public Long getId_cliente() {
-        return id_cliente;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.numCuenta);
+        hash = 41 * hash + Objects.hashCode(this.idCliente);
         return hash;
     }
 
@@ -151,20 +118,27 @@ public class Cuenta {
             return false;
         }
         final Cuenta other = (Cuenta) obj;
-        return Objects.equals(this.id, other.id);
+        if (!Objects.equals(this.numCuenta, other.numCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.idCliente, other.idCliente);
     }
 
-    @Override
+  @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cuenta{");
-        sb.append(", num_cuenta=").append(num_cuenta);
-        sb.append(", saldo_pesos=").append(saldo_pesos);
-        sb.append(", fecha_apertura=").append(fecha_apertura);
-        sb.append(", id_cliente=").append(id_cliente);
+        sb.append("id=").append(id);
+        sb.append(", numCuenta=").append(numCuenta);
+        sb.append(", saldoPesos=").append(saldoPesos);
+        sb.append(", fechaApertura=").append(fechaApertura);
+        sb.append(", idCliente=").append(idCliente);
         sb.append('}');
         return sb.toString();
     }
-
-
+        
+    
 }

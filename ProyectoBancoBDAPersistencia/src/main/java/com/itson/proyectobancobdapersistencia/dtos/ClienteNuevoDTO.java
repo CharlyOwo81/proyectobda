@@ -5,10 +5,6 @@
 package com.itson.proyectobancobdapersistencia.dtos;
 
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +14,7 @@ import java.util.regex.Pattern;
  */
 public class ClienteNuevoDTO {
     //ATRIBUTOS - DATOS PERSONALES
+    private long id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -40,6 +37,14 @@ public class ClienteNuevoDTO {
     private Pattern patron;
     private Matcher coincidencia;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
     }

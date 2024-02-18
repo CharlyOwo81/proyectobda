@@ -16,7 +16,7 @@ public class CuentaNuevaDTO {
     private String numCuenta;
     private Double saldoPesos;
     private Date fechaApertura;
-    private Long id_cliente;
+    private Long idCliente;
 
     public Long getId() {
         return id;
@@ -50,16 +50,12 @@ public class CuentaNuevaDTO {
         this.fechaApertura = fechaApertura;
     }
 
-    public Long getIdCliente() {
-        return id_cliente;
-    }
 
-    public void setIdCliente(Long idCliente) {
-        this.id_cliente = idCliente;
-    }
+    
     public boolean esValido() throws ValidacionDTOException {
         try {
             validarSaldoPesos();         
+            validarCuenta();         
             return true;
         } catch (ValidacionDTOException ex) {
             throw ex;
@@ -70,5 +66,18 @@ public class CuentaNuevaDTO {
         if (saldoPesos == null || saldoPesos <= 0) {
             throw new ValidacionDTOException("Saldo inválido");
         }
+    }
+    private void validarCuenta() throws ValidacionDTOException{
+        if (numCuenta == null || numCuenta.trim().length() != 16) {
+            throw new ValidacionDTOException("Numero de cuenta inválida");
+        }
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 }

@@ -4,18 +4,30 @@
  */
 package com.itson.proyectobancobda;
 
+import com.itson.proyectobancobdadominio.Cliente;
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
+import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
+
 /**
  *
  * @author Oley
  */
 public class MisCuentasForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MisTarjetas
-     */
-    public MisCuentasForm() {
+    private final IClientesDAO clientesDAO;
+    private ICuentasDAO cuentasDAO;
+    private IConexion conexion;
+    private Cliente cliente;    
+
+    public MisCuentasForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
         initComponents();
+        this.clientesDAO = clientesDAO;
+        this.cuentasDAO = cuentasDAO;
+        this.conexion = conexion;
+        this.cliente = cliente;
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,8 +71,18 @@ public class MisCuentasForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         btnCrear.setText("Crear nueva cuenta");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +119,18 @@ public class MisCuentasForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        this.setVisible(false);
+        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cuentasDAO, cliente, conexion);
+        menuPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        this.setVisible(false);
+        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO, cuentasDAO, conexion, cliente);
+        menuPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnCrearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
