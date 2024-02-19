@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  *
  * @author gamaliel
  */
-public class CuentaNuevaDTO {
+public class CuentaDTO {
     private String numCuenta;
     private Double saldoPesos;
     private Date fechaApertura;

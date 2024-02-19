@@ -7,7 +7,7 @@ package com.itson.proyectobancobda;
 import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
-import com.itson.proyectobancobdapersistencia.dtos.CuentaNuevaDTO;
+import com.itson.proyectobancobdapersistencia.dtos.CuentaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
@@ -26,11 +26,10 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     
     private final IClientesDAO clientesDAO;    
     private ICuentasDAO cuentasDAO;    
-    private final Cliente cliente;    
-    public CuentaNuevaForm(IClientesDAO clientesDAO, Cliente cliente) {
+    private Cliente cliente;    
+    public CuentaNuevaForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cliente = cliente;
     }
 
     private void generarCuentaAleatoria(){
@@ -42,12 +41,54 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
         String numCuenta = sb.toString();
         lblNumeroCuenta.setText(numCuenta);
     }
+    
+    private long obtenerIdCliente() {
+        // Obtener el nombre, apellido paterno y apellido materno del cliente a actualizar
+        String correo = txtCorreo.getText();
 
-    private void guardar(){
+        // Obtener el ID del cliente a actualizar de la base de datos
+        long idCliente = 0;
+        try {
+            idCliente = clientesDAO.obtenerIdCliente(correo);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener el ID del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return idCliente;
+    }    
+
+//        
+//        if (!this.lblNumeroCuenta.getText().equals("")){
+//                try {
+//                    LocalDate localDate = LocalDate.now();
+//                    Date date = java.sql.Date.valueOf(localDate);
+//                    SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+//                    String fecha = simple.format(date);
+//
+//                    String numCuenta = lblNumeroCuenta.getText();
+//
+//                    CuentaDto cuenta = new CuentaDto(numCuenta, fecha, , cli.getId());
+//
+//                    control.agregarCuenta(cuenta);
+//
+//                    ini = new InicioUsuario(control, cli);
+//                    setVisible(false);
+//                    ini.setVisible(true);
+//                } catch (PersistenciaExcepcion ex) {
+//                    Logger.getLogger(AgregarCuenta.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(this, "La cuenta tiene que ser de 10 digitos");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "La cuenta tiene que ser de 10 digitos");
+//        }    
+    
+    private void crearCuentaNueva(){
+        Long idCliente = obtenerIdCliente();
         String numCuenta = lblNumeroCuenta.getText();
         Double saldo = 0.0;
         Date fechaApertura = new Date(System.currentTimeMillis());
-        Long idCliente = this.cliente.getId();
 
         Cliente cliente = this.cliente; // Asegúrate de que cliente tenga un valor asignado antes de invocar el método guardar()
         if (cliente == null) {
@@ -55,7 +96,7 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
             return;
         }
     
-        CuentaNuevaDTO cuentaNueva = new CuentaNuevaDTO();
+        CuentaDTO cuentaNueva = new CuentaDTO();
 
         cuentaNueva.setNumCuenta(numCuenta);
         cuentaNueva.setSaldoPesos(saldo);
@@ -73,9 +114,9 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
                                             JOptionPane.ERROR_MESSAGE);
         }catch(PersistenciaException ex){
             JOptionPane.showMessageDialog(this,
-                                            "No fue posible agregar al socio", 
-                                            "Error de Almacenamiento",
-                                            JOptionPane.ERROR_MESSAGE);  
+                                          "No fue posible agregar al socio", 
+                                          "Error de Almacenamiento",
+                                          JOptionPane.ERROR_MESSAGE);  
         }
     }
     
@@ -94,6 +135,8 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
         btnGenerar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         txtSaldoPesos = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,40 +162,52 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
 
         txtSaldoPesos.setText("jTextField1");
 
+        txtCorreo.setText("jTextField1");
+
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(jLabel1)
-                .addGap(196, 196, 196)
-                .addComponent(lblNumeroCuenta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(115, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(204, 204, 204)
+                            .addComponent(lblNumeroCuenta)
+                            .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnRegresar)
+                            .addGap(107, 107, 107)
+                            .addComponent(btnGenerar)
+                            .addGap(116, 116, 116)
+                            .addComponent(btnCrear)
+                            .addGap(96, 96, 96)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRegresar)
-                        .addGap(107, 107, 107)
-                        .addComponent(btnGenerar)
-                        .addGap(116, 116, 116)
-                        .addComponent(btnCrear)
-                        .addGap(96, 96, 96))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtSaldoPesos, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(txtCorreo))
+                        .addGap(120, 120, 120))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(116, 116, 116)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblNumeroCuenta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
                 .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
                     .addComponent(btnGenerar)
@@ -168,7 +223,7 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        guardar();
+        crearCuentaNueva();
     }//GEN-LAST:event_btnCrearActionPerformed
 
 
@@ -177,7 +232,9 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblNumeroCuenta;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtSaldoPesos;
     // End of variables declaration//GEN-END:variables
 }

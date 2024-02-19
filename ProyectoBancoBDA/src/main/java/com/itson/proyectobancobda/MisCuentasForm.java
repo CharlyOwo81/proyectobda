@@ -125,7 +125,7 @@ public class MisCuentasForm extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         this.setVisible(false);
-        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO, cliente);
+        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearActionPerformed
 

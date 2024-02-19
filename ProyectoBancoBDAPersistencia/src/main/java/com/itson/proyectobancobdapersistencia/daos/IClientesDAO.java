@@ -17,5 +17,5 @@ public interface IClientesDAO {
     List<Cliente> consultar() throws PersistenciaException;
     Cliente verificarUsuario(String correo, String contrasenia) throws PersistenciaException;
     void actualizar(ClienteDTO cliente) throws PersistenciaException;    
-    long obtenerIdCliente(String nombre, String apellidoPaterno, String apellidoMaterno) throws PersistenciaException;
+    long obtenerIdCliente(String correo) throws PersistenciaException;
 }

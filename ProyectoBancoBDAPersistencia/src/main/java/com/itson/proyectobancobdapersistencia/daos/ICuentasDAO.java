@@ -5,7 +5,7 @@
 package com.itson.proyectobancobdapersistencia.daos;
 
 import com.itson.proyectobancobdadominio.Cuenta;
-import com.itson.proyectobancobdapersistencia.dtos.CuentaNuevaDTO;
+import com.itson.proyectobancobdapersistencia.dtos.CuentaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 
 /**
@@ -13,5 +13,5 @@ import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
  * @author gamaliel
  */
 public interface ICuentasDAO {
-     Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException; 
+     Cuenta agregar(CuentaDTO cuentaNueva) throws PersistenciaException; 
 }

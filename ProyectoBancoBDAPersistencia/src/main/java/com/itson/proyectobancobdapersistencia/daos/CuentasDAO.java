@@ -6,7 +6,7 @@ package com.itson.proyectobancobdapersistencia.daos;
 
 import com.itson.proyectobancobdadominio.Cuenta;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
-import com.itson.proyectobancobdapersistencia.dtos.CuentaNuevaDTO;
+import com.itson.proyectobancobdapersistencia.dtos.CuentaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +29,7 @@ public class CuentasDAO implements ICuentasDAO{
     }    
     
     @Override
-    public Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
+    public Cuenta agregar(CuentaDTO cuentaNueva) throws PersistenciaException {
         String insertarCuentaSQL = 
                     """
                     INSERT INTO cuentas(numero_cuenta, saldo_en_pesos, fecha_apertura, id_cliente)

@@ -31,23 +31,21 @@ public class ActualizarForm extends java.awt.Frame {
         this.clientesDAO = clientesDAO;
     }
     
-// Método para obtener el ID del cliente a actualizar
-private long obtenerIdCliente() {
-    // Obtener el nombre, apellido paterno y apellido materno del cliente a actualizar
-    String nombre = txtNombre.getText();
-    String apellidoPaterno = txtApellidoPaterno.getText();
-    String apellidoMaterno = txtApellidoMaterno.getText();
+    // Método para obtener el ID del cliente a actualizar
+    private long obtenerIdCliente() {
+        // Obtener el nombre, apellido paterno y apellido materno del cliente a actualizar
+        String correo = txtCorreo.getText();
 
-    // Obtener el ID del cliente a actualizar de la base de datos
-    long idCliente = 0;
-    try {
-        idCliente = clientesDAO.obtenerIdCliente(nombre, apellidoPaterno, apellidoMaterno);
-    } catch (PersistenciaException e) {
-        JOptionPane.showMessageDialog(this, "Error al obtener el ID del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        // Obtener el ID del cliente a actualizar de la base de datos
+        long idCliente = 0;
+        try {
+            idCliente = clientesDAO.obtenerIdCliente(correo);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener el ID del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-    return idCliente;
-}    
+        return idCliente;
+    }    
     
 private void actualizar() {
     // Obtener el ID del cliente a actualizar

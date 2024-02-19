@@ -69,6 +69,23 @@ public class ClientesDAO implements IClientesDAO {
             throw new PersistenciaException("No se pudo guardar el Cliente", ex);
         }
     }
+    @Override
+    public long obtenerIdCliente(String correo) throws PersistenciaException {
+        String consultaIdClienteSQL = "SELECT id FROM clientes WHERE correo_cliente = ?";
+        try (Connection conexion = this.conexionBD.obtenerConexion();
+             PreparedStatement comando = conexion.prepareStatement(consultaIdClienteSQL)) {
+            comando.setString(1, correo);
+            ResultSet resultado = comando.executeQuery();
+            if (resultado.next()) {
+                return resultado.getLong("id");
+            } else {
+                throw new PersistenciaException("No se encontró el cliente en la base de datos");
+            }
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "No se pudo obtener el ID del cliente", ex);
+            throw new PersistenciaException("No se pudo obtener el ID del cliente", ex);
+        }
+    }  
     
     @Override
     public void actualizar(ClienteDTO cliente) throws PersistenciaException {
@@ -185,24 +202,5 @@ public class ClientesDAO implements IClientesDAO {
             throw new PersistenciaException("No se pudo verificar el usuario", ex);
         }
     }
-    
-    @Override
-    public long obtenerIdCliente(String nombre, String apellidoPaterno, String apellidoMaterno) throws PersistenciaException {
-        String consultaIdClienteSQL = "SELECT id FROM clientes WHERE correo_cliente = ? AND contrasenia_cliente = ? ";
-        try (Connection conexion = this.conexionBD.obtenerConexion();
-             PreparedStatement comando = conexion.prepareStatement(consultaIdClienteSQL)) {
-            comando.setString(1, nombre);
-            comando.setString(2, apellidoPaterno);
-            comando.setString(3, apellidoMaterno);
-            ResultSet resultado = comando.executeQuery();
-            if (resultado.next()) {
-                return resultado.getLong("id");
-            } else {
-                throw new PersistenciaException("No se encontró el cliente en la base de datos");
-            }
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "No se pudo obtener el ID del cliente", ex);
-            throw new PersistenciaException("No se pudo obtener el ID del cliente", ex);
-        }
-    }    
-    }
+     
+}
