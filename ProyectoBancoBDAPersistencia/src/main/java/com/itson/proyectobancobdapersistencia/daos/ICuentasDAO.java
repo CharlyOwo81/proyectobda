@@ -4,19 +4,14 @@
  */
 package com.itson.proyectobancobdapersistencia.daos;
 
-import com.itson.proyectobancobda.paginado.ConfiguracionPaginado;
-import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdadominio.Cuenta;
+import com.itson.proyectobancobdapersistencia.dtos.CuentaNuevaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
-import java.util.List;
 
 /**
  *
  * @author gamaliel
  */
 public interface ICuentasDAO {
-    Cuenta insertar(Cuenta cuenta) throws PersistenciaException;
-    List<Cuenta> consultar(ConfiguracionPaginado configPaginado, Cliente cliente) throws PersistenciaException;
-    List<Cuenta> consultarLista(Cliente cliente) throws PersistenciaException;
-    Cuenta actualizar(Cuenta cuenta) throws PersistenciaException;    
+     Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException; 
 }

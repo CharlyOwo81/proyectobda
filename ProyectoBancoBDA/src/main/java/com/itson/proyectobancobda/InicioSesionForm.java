@@ -5,10 +5,7 @@
 package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
-import com.itson.proyectobancobdapersistencia.conexion.IConexion;
-import com.itson.proyectobancobdapersistencia.daos.CuentasDAO;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import javax.swing.JOptionPane;
 
@@ -19,20 +16,12 @@ import javax.swing.JOptionPane;
 public class InicioSesionForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;  
-    private ICuentasDAO cuentasDAO;  
-    private IConexion conexion;
-    private Cliente cliente;
+    private Cliente cliente;  
 
-    public InicioSesionForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+    public InicioSesionForm(IClientesDAO clientesDAO, Cliente cliente) {
+        initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuentasDAO = cuentasDAO;
-        this.conexion = conexion;
         this.cliente = cliente;
-    }
-
-    public InicioSesionForm(IClientesDAO clientesDAO) {
-                initComponents();
-        this.clientesDAO = clientesDAO;
     }
     
     
@@ -47,6 +36,9 @@ public class InicioSesionForm extends javax.swing.JFrame {
                 // Redirigir a la siguiente pantalla o realizar cualquier otra acción
                 JOptionPane.showMessageDialog(this, "Bienvenido " + cliente.getNombre());
                 // Aquí puedes agregar el código para redirigir a la siguiente pantalla
+                this.setVisible(false);
+                MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cliente);
+                menuPrincipal.setVisible(true);                
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
             }
@@ -154,9 +146,6 @@ public class InicioSesionForm extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         verificar();
-        this.setVisible(false);
-        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cuentasDAO, cliente, conexion);
-        menuPrincipal.setVisible(true);
      }//GEN-LAST:event_btnContinuarActionPerformed
 
 

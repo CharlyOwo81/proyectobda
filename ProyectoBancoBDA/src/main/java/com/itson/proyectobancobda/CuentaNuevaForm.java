@@ -5,17 +5,13 @@
 package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
-import com.itson.proyectobancobdadominio.Cuenta;
-import com.itson.proyectobancobdapersistencia.conexion.IConexion;
-//import com.itson.proyectobancobdapersistencia.daos.GeneradorCuenta;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-//import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
+import com.itson.proyectobancobdapersistencia.dtos.CuentaNuevaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
+import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,97 +19,66 @@ import javax.swing.JOptionPane;
  * @author gamaliel
  */
 public class CuentaNuevaForm extends javax.swing.JFrame {
-    private final IClientesDAO clientesDAO;
-    private ICuentasDAO cuentasDAO;
-    private IConexion conexion;
-    private Cliente cliente; 
-    private static final int PREFIJO_CUENTA = 4169;
-    private static final int MAX_DIGITOS_CUENTA = 16;
 
-    public CuentaNuevaForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+    /**
+     * Creates new form CuentaNuevaForm
+     */
+    
+    private final IClientesDAO clientesDAO;    
+    private ICuentasDAO cuentasDAO;    
+    private final Cliente cliente;    
+    public CuentaNuevaForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuentasDAO = cuentasDAO;
-        this.conexion = conexion;
         this.cliente = cliente;
     }
 
-    private void generarCuentaAleatoria() {
+    private void generarCuentaAleatoria(){
         Random random = new Random();
-        int numeroAleatorio = random.nextInt((int) Math.pow(16, MAX_DIGITOS_CUENTA - 1));
-        String cuenta = String.format("%0" + MAX_DIGITOS_CUENTA + "d", PREFIJO_CUENTA + numeroAleatorio);
-        this.lblNumCuenta.setText(cuenta);
-    }    
-    
-    private Cuenta crearCuentaNueva() throws PersistenciaException {
-        Double saldo = Double.valueOf(this.txtSaldoPesos.getText());
-        String numCuenta = this.lblNumCuenta.getText();
+        StringBuilder sb = new StringBuilder("4169");
+        while (sb.length() < 16) {
+            sb.append(random.nextInt(10));
+        }
+        String numCuenta = sb.toString();
+        lblNumeroCuenta.setText(numCuenta);
+    }
+
+    private void guardar(){
+        String numCuenta = lblNumeroCuenta.getText();
+        Double saldo = 0.0;
         Date fechaApertura = new Date(System.currentTimeMillis());
-        Long idCliente = this.cliente != null ? this.cliente.getId() : null;
-        Cuenta cuentaNueva = new Cuenta(numCuenta, saldo, fechaApertura, idCliente);
-        return cuentasDAO.insertar(cuentaNueva);
+        Long idCliente = this.cliente.getId();
+
+        Cliente cliente = this.cliente; // Asegúrate de que cliente tenga un valor asignado antes de invocar el método guardar()
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        CuentaNuevaDTO cuentaNueva = new CuentaNuevaDTO();
+
+        cuentaNueva.setNumCuenta(numCuenta);
+        cuentaNueva.setSaldoPesos(saldo);
+        cuentaNueva.setFechaApertura(fechaApertura);
+        cuentaNueva.setIdCliente(idCliente);
+
+        try {
+            cuentaNueva.esValido();
+            this.cuentasDAO.agregar(cuentaNueva);
+            JOptionPane.showMessageDialog(this, "Cliente Agregado");
+        } catch (ValidacionDTOException ex) {
+            JOptionPane.showMessageDialog(this, 
+                                            ex.getMessage(), 
+                                            "Error de Validación", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }catch(PersistenciaException ex){
+            JOptionPane.showMessageDialog(this,
+                                            "No fue posible agregar al socio", 
+                                            "Error de Almacenamiento",
+                                            JOptionPane.ERROR_MESSAGE);  
+        }
     }
     
-    
-//    private Cuenta crearCuentaNueva() {
-//        String monto = txtSaldoPesos.getText();
-//        float saldo = Float.parseFloat(monto);
-//        CuentaNuevaDTO cuentaNueva = new CuentaNuevaDTO();
-//
-//        cuentaNueva.setFechaApertura(new java.sql.Date());
-//
-//        cuentaNueva.setIdCliente(cliente.getId());
-//        cuentaNueva.setSaldoPesos(saldo);
-//        try {
-//            cuentaNueva.esValido();
-//            Cuenta cuenta = this.cuentasDAO.insertar(cuentaNueva, cliente, saldo);
-//            JOptionPane.showMessageDialog(this, "Se creó la cuenta con éxito", "Todo correcto", JOptionPane.INFORMATION_MESSAGE);
-//
-//        } catch (ValidacionDTOException e) {
-//            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Rellena todas las casillas", JOptionPane.ERROR_MESSAGE);
-//        } catch (PersistenciaException ex) {
-//            Logger.getLogger(CuentaNuevaForm.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
-    private void crear(ICuentasDAO ICuentasDAO) throws PersistenciaException {
-        try {
-            Cuenta cuentaN = this.crearCuentaNueva();
-            this.cuentasDAO.insertar(cuentaN);
-            this.mensajeCuentaGuardado(cuentaN);
-        } catch (PersistenciaException e) {
-            this.mensajeErrorAlGuardar();
-        }
-    }    
-
-    private void mensajeCuentaGuardado(Cuenta cuentaGuardada){
-        JOptionPane.showMessageDialog(this, "Se creó la cuenta: " + cuentaGuardada.getNumCuenta(),
-                                            "Información",JOptionPane.INFORMATION_MESSAGE);
-    }    
-    
-    private void mensajeErrorAlGuardar(){
-        JOptionPane.showMessageDialog(this, "No fue posible crear la cuenta","Error",JOptionPane.ERROR_MESSAGE);
-    }    
-//    
-//    private void guardarCuenta(String numeroCuenta) {
-//       MisCuentasForm cuentas = new MisCuentasForm(clientesDAO, cuentasDAO, conexion,cliente);
-//        if(this.txtSaldoPesos.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(null, "Ingrese un saldo a agregar a la cuenta");
-//        }else{
-//            try{
-//                this.crear();
-//                this.setVisible(false);
-//                cuentas.setVisible(true);
-//            }catch(PersistenciaException e){
-//                JOptionPane.showMessageDialog(null, "No se pudo crear la cuenta");
-//            }
-//        }
-//    }
-    
-
-
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,19 +89,17 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        lblNumCuenta = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtSaldoPesos = new javax.swing.JTextField();
+        lblNumeroCuenta = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnGenerar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        txtSaldoPesos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Numero de cuenta");
+        jLabel1.setText("Numero cuenta");
 
-        jLabel2.setText("Saldo");
+        lblNumeroCuenta.setText("jLabel2");
 
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -145,15 +108,6 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Crear nueva cuenta");
-
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,79 +115,69 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
             }
         });
 
+        btnRegresar.setText("Regresar");
+
+        txtSaldoPesos.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNumCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnRegresar)
-                .addGap(50, 50, 50)
-                .addComponent(btnGenerar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCrear)
-                .addGap(34, 34, 34))
+                .addGap(123, 123, 123)
+                .addComponent(jLabel1)
+                .addGap(196, 196, 196)
+                .addComponent(lblNumeroCuenta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(141, 141, 141))
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRegresar)
+                        .addGap(107, 107, 107)
+                        .addComponent(btnGenerar)
+                        .addGap(116, 116, 116)
+                        .addComponent(btnCrear)
+                        .addGap(96, 96, 96))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
+                .addGap(138, 138, 138)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblNumCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
+                    .addComponent(lblNumeroCuenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtSaldoPesos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
                     .addComponent(btnCrear)
-                    .addComponent(btnGenerar))
-                .addGap(39, 39, 39))
+                    .addComponent(btnGenerar)
+                    .addComponent(btnRegresar))
+                .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        this.setVisible(false);
-        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO, cuentasDAO, conexion, cliente);
-        menuPrincipal.setVisible(true);
-    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         generarCuentaAleatoria();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-crear();
+        guardar();
     }//GEN-LAST:event_btnCrearActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblNumCuenta;
+    private javax.swing.JLabel lblNumeroCuenta;
     private javax.swing.JTextField txtSaldoPesos;
     // End of variables declaration//GEN-END:variables
 }

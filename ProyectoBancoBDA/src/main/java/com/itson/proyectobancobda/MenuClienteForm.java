@@ -1,12 +1,9 @@
 package com.itson.proyectobancobda;
 
 
-import com.itson.proyectobancobda.MenuPrincipalForm;
 import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
-import com.itson.proyectobancobdapersistencia.daos.CuentasDAO;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,19 +17,15 @@ import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
-    private ICuentasDAO cuentasDAO;
-    private IConexion conexion;
     private Cliente cliente;
     /**
      * Creates new form MenuClienteForm
      */
 
-    public MenuClienteForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, Cliente cliente, IConexion conexion) {
+    public MenuClienteForm(IClientesDAO clientesDAO, Cliente cliente) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuentasDAO = cuentasDAO;
         this.cliente = cliente;
-        this.conexion =conexion;
     }
 
     protected Cliente getCliente (){
@@ -70,6 +63,11 @@ public class MenuClienteForm extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar datos");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnAñadirSaldo.setText("Añadir Saldo");
 
@@ -126,9 +124,15 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
         this.setVisible(false);
-        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO, cuentasDAO, conexion, cliente);
+        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        this.setVisible(false);
+        ActualizarForm actualizar = new ActualizarForm(clientesDAO);
+        actualizar.setVisible(true);
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
   
     

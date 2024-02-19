@@ -6,25 +6,21 @@ package com.itson.proyectobancobdapersistencia.dtos;
 
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author gamaliel
  */
 public class CuentaNuevaDTO {
-    private Long id;
     private String numCuenta;
     private Double saldoPesos;
     private Date fechaApertura;
     private Long idCliente;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String validadorNumerico = "^[0-9]+$";
+    private Pattern patron;
+    private Matcher coincidencia;    
 
     public String getNumCuenta() {
         return numCuenta;
@@ -50,34 +46,42 @@ public class CuentaNuevaDTO {
         this.fechaApertura = fechaApertura;
     }
 
-
-    
-    public boolean esValido() throws ValidacionDTOException {
-        try {
-            validarSaldoPesos();         
-            validarCuenta();         
-            return true;
-        } catch (ValidacionDTOException ex) {
-            throw ex;
-        }
-    }
-
-    private void validarSaldoPesos() throws ValidacionDTOException{
-        if (saldoPesos == null || saldoPesos <= 0) {
-            throw new ValidacionDTOException("Saldo inválido");
-        }
-    }
-    private void validarCuenta() throws ValidacionDTOException{
-        if (numCuenta == null || numCuenta.trim().length() != 16) {
-            throw new ValidacionDTOException("Numero de cuenta inválida");
-        }
-    }
-
     public Long getIdCliente() {
         return idCliente;
     }
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+    
+    public boolean esValido() throws ValidacionDTOException {
+        try {
+            validarNumeroCuenta();
+            validarSaldoPesos();          
+            return true;
+        } catch (ValidacionDTOException ex) {
+            throw ex;
+        }
+    }
+    
+    private void validadorNumerico(String texto, String mensajeError) throws ValidacionDTOException {
+        patron = Pattern.compile(validadorNumerico);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
+        }
+    } 
+
+    private void validarNumeroCuenta() throws ValidacionDTOException{
+        if (numCuenta == null || numCuenta.isEmpty() || numCuenta.trim().length() != 16) {
+            throw new ValidacionDTOException("El número de cuenta no puede estar vacío");
+        }
+        validadorNumerico(numCuenta, "Número de cuenta inválido");
+    }
+
+    private void validarSaldoPesos() throws ValidacionDTOException{
+        if (saldoPesos == null || saldoPesos < 0) {
+            throw new ValidacionDTOException("El saldo en pesos debe ser mayor o igual a cero");
+        }
     }
 }

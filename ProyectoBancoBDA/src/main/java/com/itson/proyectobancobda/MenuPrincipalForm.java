@@ -5,9 +5,7 @@
 package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
-import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 
 
@@ -18,9 +16,7 @@ import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 public class MenuPrincipalForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
-//    private final ICuentasDAO cuentasDAO;
-//    private final IConexion conexion;
-//    private final Cliente cliente;
+    private Cliente cliente;
 
     public MenuPrincipalForm(IClientesDAO clientesDAO) {
         initComponents();
@@ -101,7 +97,7 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
 
     private void IniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesionActionPerformed
         this.setVisible(false);
-        InicioSesionForm ventanaInicioSesion = new InicioSesionForm(clientesDAO);
+        InicioSesionForm ventanaInicioSesion = new InicioSesionForm(clientesDAO, cliente);
         ventanaInicioSesion.setVisible(true);
     }//GEN-LAST:event_IniciarSesionActionPerformed
 

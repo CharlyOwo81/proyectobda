@@ -18,84 +18,107 @@ import javax.swing.JOptionPane;
  *
  * @author Oley
  */
-public class RegistroForm extends java.awt.Frame {
+public class ActualizarForm extends java.awt.Frame {
 
     /**
      * Creates new form RegistroForm
      */
     private final IClientesDAO clientesDAO;
+    private Cliente cliente;
 
-    public RegistroForm(IClientesDAO clientesDAO) {
+    public ActualizarForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
     }
     
-    private void guardar(){
-        
-        String nombre = txtNombre.getText();
-        String apellidoPaterno = txtApellidoPaterno.getText();
-        String apellidoMaterno = txtApellidoMaterno.getText();
-        String fechaNacimiento = txtFechaNacimiento.getText();
-        // Validar el formato de la fecha de nacimiento con una expresión regular
-        if (fechaNacimiento.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            // El formato de la fecha es válido, intentar convertir a Date
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setLenient(false);
-                Date date = sdf.parse(fechaNacimiento);
-                // La fecha es válida, hacer algo con ella
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "La fecha de nacimiento no es válida", "Error de Validación", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "El formato de la fecha de nacimiento no es válido", "Error de Validación", JOptionPane.ERROR_MESSAGE);
-        }            
-        String calle = txtCalle.getText();
-        String colonia = txtColonia.getText();
-        String numInterior = txtNumInterior.getText();
-        String numExterior = txtNumExterior.getText();
-        String codigoPostal = txtCodigoPostal.getText();    
-        String correo = txtCorreo.getText();    
-        String contrasenia = txtContrasenia.getText();    
-       
-        ClienteDTO clienteNuevo = new ClienteDTO();
-        
-        clienteNuevo.setNombre(nombre);
-        clienteNuevo.setApellidoPaterno(apellidoPaterno);
-        clienteNuevo.setApellidoMaterno(apellidoMaterno);
-        clienteNuevo.setFechaNacimiento(fechaNacimiento);
-        clienteNuevo.setCalle(calle);
-        clienteNuevo.setColonia(colonia);
-        clienteNuevo.setNumInterior(numInterior);
-        clienteNuevo.setNumExterior(numExterior);
-        clienteNuevo.setCodigoPostal(codigoPostal);
-        clienteNuevo.setCorreo(correo);
-        clienteNuevo.setContrasenia(contrasenia);
+// Método para obtener el ID del cliente a actualizar
+private long obtenerIdCliente() {
+    // Obtener el nombre, apellido paterno y apellido materno del cliente a actualizar
+    String nombre = txtNombre.getText();
+    String apellidoPaterno = txtApellidoPaterno.getText();
+    String apellidoMaterno = txtApellidoMaterno.getText();
 
+    // Obtener el ID del cliente a actualizar de la base de datos
+    long idCliente = 0;
+    try {
+        idCliente = clientesDAO.obtenerIdCliente(nombre, apellidoPaterno, apellidoMaterno);
+    } catch (PersistenciaException e) {
+        JOptionPane.showMessageDialog(this, "Error al obtener el ID del cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    return idCliente;
+}    
+    
+private void actualizar() {
+    // Obtener el ID del cliente a actualizar
+    long idCliente = obtenerIdCliente();
+
+    // Obtener y validar los datos del formulario
+    String nombre = txtNombre.getText();
+    String apellidoPaterno = txtApellidoPaterno.getText();
+    String apellidoMaterno = txtApellidoMaterno.getText();
+    String fechaNacimiento = txtFechaNacimiento.getText();
+    // Validar el formato de la fecha de nacimiento con una expresión regular
+    if (fechaNacimiento.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+        // El formato de la fecha es válido, intentar convertir a Date
         try {
-            clienteNuevo.esValido();
-            this.clientesDAO.agregar(clienteNuevo);
-            JOptionPane.showMessageDialog(this, "Cliente Agregado");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setLenient(false);
+            Date date = sdf.parse(fechaNacimiento);
+            // La fecha es válida, hacer algo con ella
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "La fecha de nacimiento no es válida", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return; // Detener la actualización
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "El formato de la fecha de nacimiento no es válido", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+        return; // Detener la actualización
+    }
+    String calle = txtCalle.getText();
+    String colonia = txtColonia.getText();
+    String numInterior = txtNumInterior.getText();
+    String numExterior = txtNumExterior.getText();
+    String codigoPostal = txtCodigoPostal.getText();    
+    String correo = txtCorreo.getText();    
+    String contrasenia = txtContrasenia.getText(); 
+    
+    // Crear un ClienteDTO con el ID del cliente
+    ClienteDTO cliente = new ClienteDTO();
+    
+    cliente.setId(idCliente);
+    cliente.setNombre(nombre);
+    cliente.setApellidoPaterno(apellidoPaterno);
+    cliente.setApellidoMaterno(apellidoMaterno);
+    cliente.setFechaNacimiento(fechaNacimiento);
+    cliente.setCalle(calle);
+    cliente.setColonia(colonia);
+    cliente.setNumInterior(numInterior);
+    cliente.setNumExterior(numExterior);
+    cliente.setCodigoPostal(codigoPostal);
+    cliente.setCorreo(correo);
+    cliente.setContrasenia(contrasenia);
+
+    try {
+        // Validar los datos del cliente
+        cliente.esValido();
+
+        // Llamar al método de actualización en la capa de persistencia
+        this.clientesDAO.actualizar(cliente);
+
+            JOptionPane.showMessageDialog(this, "Cliente Actualizado");
         } catch (ValidacionDTOException ex) {
             JOptionPane.showMessageDialog(this, 
-                                            ex.getMessage(), 
-                                            "Error de Validación", 
-                                            JOptionPane.ERROR_MESSAGE);
-        }catch(PersistenciaException ex){
-           JOptionPane.showMessageDialog(this,
-                                            "No fue posible agregar al socio", 
-                                            "Error de Almacenamiento",
-                                            JOptionPane.ERROR_MESSAGE);  
+                                        ex.getMessage(), 
+                                        "Error de Validación", 
+                                        JOptionPane.ERROR_MESSAGE);
+        } catch (PersistenciaException ex) {
+            JOptionPane.showMessageDialog(this, 
+                                        "No se pudo actualizar el cliente", 
+                                        "Error de Almacenamiento", 
+                                        JOptionPane.ERROR_MESSAGE);
         }
-        
-        //Obtener datos del form
-        
-        //Encapsularlos
-        //Validarlos
-        //Mandarlos a la DAO
-        //Segun resultado le notificamos al usuario
     }
-    
+
     private void limpiar(){
         txtNombre.setText("");
         txtApellidoPaterno.setText("");
@@ -246,7 +269,7 @@ public class RegistroForm extends java.awt.Frame {
     }//GEN-LAST:event_exitForm
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        guardar();
+        actualizar();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed

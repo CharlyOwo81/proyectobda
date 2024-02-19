@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  *
  * @author Oley
  */
-public class ClienteNuevoDTO {
+public class ClienteDTO {
     //ATRIBUTOS - DATOS PERSONALES
     private long id;
     private String nombre;

@@ -7,7 +7,6 @@ package com.itson.proyectobancobda;
 import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 /**
  *
@@ -16,14 +15,12 @@ import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 public class MisCuentasForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
-    private ICuentasDAO cuentasDAO;
     private IConexion conexion;
     private Cliente cliente;    
 
-    public MisCuentasForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
+    public MisCuentasForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
-        this.cuentasDAO = cuentasDAO;
         this.conexion = conexion;
         this.cliente = cliente;
     }
@@ -122,13 +119,13 @@ public class MisCuentasForm extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cuentasDAO, cliente, conexion);
+        MenuClienteForm menuPrincipal = new MenuClienteForm(clientesDAO, cliente);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         this.setVisible(false);
-        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO, cuentasDAO, conexion, cliente);
+        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO, cliente);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearActionPerformed
 

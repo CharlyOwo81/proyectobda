@@ -1,7 +1,7 @@
 package com.itson.proyectobancobda;
 
 
-import com.itson.proyectobancobda.MenuPrincipalForm;
+import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.conexion.Conexion;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.ClientesDAO;
