@@ -188,7 +188,7 @@ public class ClientesDAO implements IClientesDAO {
     
     @Override
     public long obtenerIdCliente(String nombre, String apellidoPaterno, String apellidoMaterno) throws PersistenciaException {
-        String consultaIdClienteSQL = "SELECT id FROM clientes WHERE nombre = ? AND apellido_paterno = ? AND apellido_materno = ?";
+        String consultaIdClienteSQL = "SELECT id FROM clientes WHERE correo_cliente = ? AND contrasenia_cliente = ? ";
         try (Connection conexion = this.conexionBD.obtenerConexion();
              PreparedStatement comando = conexion.prepareStatement(consultaIdClienteSQL)) {
             comando.setString(1, nombre);
