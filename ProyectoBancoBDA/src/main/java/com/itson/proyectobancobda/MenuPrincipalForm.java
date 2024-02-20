@@ -6,6 +6,7 @@ package com.itson.proyectobancobda;
 
 import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import javax.swing.ImageIcon;
 
 
 
@@ -22,6 +23,8 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
         initComponents();
         this.clientesDAO = clientesDAO;
     }
+    
+    ImageIcon botonInicioSesion = new ImageIcon("resources/usuario.png");
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +49,13 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(157, 36, 73));
 
-        btnRegistrar.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        btnRegistrar.setBackground(new java.awt.Color(179, 142, 93));
+        btnRegistrar.setFont(new java.awt.Font("NATS", 1, 36)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -77,8 +85,11 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnIniciarSesion.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        btnIniciarSesion.setBackground(new java.awt.Color(19, 50, 43));
+        btnIniciarSesion.setFont(new java.awt.Font("NATS", 1, 36)); // NOI18N
+        btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setText("Iniciar sesion");
+        btnIniciarSesion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSesionActionPerformed(evt);
@@ -90,22 +101,22 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
-                .addGap(32, 32, 32)
-                .addComponent(btnIniciarSesion)
-                .addGap(110, 110, 110))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar)
-                    .addComponent(btnIniciarSesion))
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +141,7 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        btnRegistrar.setIcon(botonInicioSesion);
         this.setVisible(false);
         RegistroForm ventanaRegistro = new RegistroForm(clientesDAO);
         ventanaRegistro.setVisible(true);    

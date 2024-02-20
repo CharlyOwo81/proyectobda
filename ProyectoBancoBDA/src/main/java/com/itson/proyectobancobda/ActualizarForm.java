@@ -25,7 +25,7 @@ public class ActualizarForm extends java.awt.Frame {
      */
     private final IClientesDAO clientesDAO;
     private Cliente cliente;
-
+    
     public ActualizarForm(IClientesDAO clientesDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
@@ -117,20 +117,6 @@ private void actualizar() {
         }
     }
 
-    private void limpiar(){
-        txtNombre.setText("");
-        txtApellidoPaterno.setText("");
-        txtApellidoMaterno.setText("");
-        txtContrasenia.setText("");
-        txtCalle.setText("");
-        txtColonia.setText("");
-        txtNumInterior.setText("");
-        txtNumExterior.setText("");
-        txtCodigoPostal.setText("");
-        txtCorreo.setText("");
-        txtContrasenia.setText("");
-    }    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,122 +125,823 @@ private void actualizar() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblDatosPersonales = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblDatosPersonales1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        lblRegistroUsuario = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel3 = new javax.swing.JPanel();
         Nombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        Direccion = new javax.swing.JLabel();
-        txtCalle = new javax.swing.JTextField();
-        Fecha = new javax.swing.JLabel();
-        txtNumInterior = new javax.swing.JTextField();
-        Contraseña = new javax.swing.JLabel();
-        btnEnviar = new javax.swing.JButton();
-        txtApellidoPaterno = new javax.swing.JTextField();
         Nombre1 = new javax.swing.JLabel();
+        txtApellidoPaterno = new javax.swing.JTextField();
+        Nombre3 = new javax.swing.JLabel();
         txtApellidoMaterno = new javax.swing.JTextField();
         Nombre2 = new javax.swing.JLabel();
-        Registro1 = new javax.swing.JLabel();
-        lblDatosPersonales1 = new javax.swing.JLabel();
+        lblAviso = new javax.swing.JLabel();
+        txtFechaNacimiento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtContrasenia = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        Nombre4 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        Nombre5 = new javax.swing.JLabel();
+        txtApellidoPaterno1 = new javax.swing.JTextField();
+        Nombre6 = new javax.swing.JLabel();
+        txtApellidoMaterno1 = new javax.swing.JTextField();
+        Nombre7 = new javax.swing.JLabel();
+        lblAviso1 = new javax.swing.JLabel();
+        txtFechaNacimiento1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtCorreo1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtContrasenia1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        Nombre8 = new javax.swing.JLabel();
+        txtNombre2 = new javax.swing.JTextField();
+        Nombre9 = new javax.swing.JLabel();
+        txtApellidoPaterno2 = new javax.swing.JTextField();
+        Nombre10 = new javax.swing.JLabel();
+        txtApellidoMaterno2 = new javax.swing.JTextField();
+        Nombre11 = new javax.swing.JLabel();
+        lblAviso2 = new javax.swing.JLabel();
+        txtFechaNacimiento2 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtCorreo2 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtContrasenia2 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        Nombre12 = new javax.swing.JLabel();
+        txtNombre3 = new javax.swing.JTextField();
+        Nombre13 = new javax.swing.JLabel();
+        txtApellidoPaterno3 = new javax.swing.JTextField();
+        Nombre14 = new javax.swing.JLabel();
+        txtApellidoMaterno3 = new javax.swing.JTextField();
+        Nombre15 = new javax.swing.JLabel();
+        lblAviso3 = new javax.swing.JLabel();
+        txtFechaNacimiento3 = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        txtCorreo3 = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtContrasenia3 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        lblDatosPersonales2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        Direccion = new javax.swing.JLabel();
         Direccion1 = new javax.swing.JLabel();
+        Contraseña = new javax.swing.JLabel();
+        Fecha = new javax.swing.JLabel();
+        Fecha1 = new javax.swing.JLabel();
+        txtCalle = new javax.swing.JTextField();
+        txtNumInterior = new javax.swing.JTextField();
         txtColonia = new javax.swing.JTextField();
         txtCodigoPostal = new javax.swing.JTextField();
-        Fecha1 = new javax.swing.JLabel();
         txtNumExterior = new javax.swing.JTextField();
-        Nombre3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         btnRegresar1 = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
-        txtContrasenia = new javax.swing.JTextField();
-        lblAviso = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtFechaNacimiento = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
+        lblRegistroUsuario1 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 exitForm(evt);
             }
         });
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDatosPersonales.setText("DATOS DOMICILIARIOS");
-        add(lblDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel1.setLayout(null);
 
+        lblDatosPersonales1.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblDatosPersonales1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDatosPersonales1.setText("DATOS PERSONALES");
+        jPanel1.add(lblDatosPersonales1);
+        lblDatosPersonales1.setBounds(133, 171, 142, 31);
+
+        jPanel2.setBackground(new java.awt.Color(98, 17, 50));
+
+        jLabel3.setFont(new java.awt.Font("NATS", 0, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("BANCO DEL BIENESTAR");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(207, 207, 207)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 61, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 808, 115);
+
+        lblRegistroUsuario.setFont(new java.awt.Font("NATS", 0, 24)); // NOI18N
+        lblRegistroUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegistroUsuario.setText("Ingrese su correo para validar su cliente");
+        lblRegistroUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(lblRegistroUsuario);
+        lblRegistroUsuario.setBounds(400, 120, 350, 28);
+
+        jSeparator1.setForeground(new java.awt.Color(98, 17, 50));
+        jPanel1.add(jSeparator1);
+        jSeparator1.setBounds(0, 155, 808, 10);
+
+        jPanel3.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(179, 142, 93), 4));
+        jPanel3.setLayout(null);
+
+        Nombre.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre.setForeground(new java.awt.Color(255, 255, 255));
         Nombre.setText("Nombre:");
-        add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 110, 20));
+        jPanel3.add(Nombre);
+        Nombre.setBounds(20, 30, 70, 20);
 
-        Direccion.setText("Calle:");
-        add(Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
-        add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 160, -1));
+        txtNombre.setBackground(new java.awt.Color(157, 36, 73));
+        txtNombre.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(204, 204, 204));
+        txtNombre.setBorder(null);
+        txtNombre.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel3.add(txtNombre);
+        txtNombre.setBounds(150, 20, 190, 30);
 
-        Fecha.setText("Numero interior:");
-        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
-        add(txtNumInterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 90, -1));
+        Nombre1.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre1.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre1.setText("Apellido Paterno:");
+        jPanel3.add(Nombre1);
+        Nombre1.setBounds(20, 70, 120, 20);
 
-        Contraseña.setText("Código Postal:");
-        add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        txtApellidoPaterno.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoPaterno.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtApellidoPaterno.setForeground(new java.awt.Color(204, 204, 204));
+        txtApellidoPaterno.setBorder(null);
+        txtApellidoPaterno.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel3.add(txtApellidoPaterno);
+        txtApellidoPaterno.setBounds(150, 60, 190, 30);
 
-        btnEnviar.setText("Enviar");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+        Nombre3.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre3.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre3.setText("Apellido Materno:");
+        jPanel3.add(Nombre3);
+        Nombre3.setBounds(20, 110, 120, 20);
+
+        txtApellidoMaterno.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoMaterno.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtApellidoMaterno.setForeground(new java.awt.Color(204, 204, 204));
+        txtApellidoMaterno.setBorder(null);
+        txtApellidoMaterno.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel3.add(txtApellidoMaterno);
+        txtApellidoMaterno.setBounds(150, 100, 190, 30);
+
+        Nombre2.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre2.setText("Fecha de Nacimiento:");
+        jPanel3.add(Nombre2);
+        Nombre2.setBounds(20, 150, 150, 20);
+
+        lblAviso.setFont(new java.awt.Font("NATS", 2, 16)); // NOI18N
+        lblAviso.setForeground(new java.awt.Color(255, 255, 255));
+        lblAviso.setText("En formato yyyy-MM-dd.     Ejemplo: 1988-02-13");
+        jPanel3.add(lblAviso);
+        lblAviso.setBounds(30, 180, 310, 25);
+
+        txtFechaNacimiento.setBackground(new java.awt.Color(157, 36, 73));
+        txtFechaNacimiento.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtFechaNacimiento.setForeground(new java.awt.Color(204, 204, 204));
+        txtFechaNacimiento.setBorder(null);
+        txtFechaNacimiento.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel3.add(txtFechaNacimiento);
+        txtFechaNacimiento.setBounds(180, 140, 160, 30);
+
+        jLabel2.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Correo:");
+        jPanel3.add(jLabel2);
+        jLabel2.setBounds(20, 220, 60, 28);
+
+        txtCorreo.setBackground(new java.awt.Color(157, 36, 73));
+        txtCorreo.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(204, 204, 204));
+        txtCorreo.setBorder(null);
+        txtCorreo.setCaretColor(new java.awt.Color(157, 36, 73));
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
+                txtCorreoActionPerformed(evt);
             }
         });
-        add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
-        add(txtApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 150, 20));
+        jPanel3.add(txtCorreo);
+        txtCorreo.setBounds(130, 210, 210, 30);
 
-        Nombre1.setText("Apellido Paterno:");
-        add(Nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
-        add(txtApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 150, 20));
+        jLabel1.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Contrasenia:");
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(20, 270, 90, 20);
 
-        Nombre2.setText("Fecha de Nacimiento:");
-        add(Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        txtContrasenia.setBackground(new java.awt.Color(157, 36, 73));
+        txtContrasenia.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtContrasenia.setForeground(new java.awt.Color(204, 204, 204));
+        txtContrasenia.setBorder(null);
+        txtContrasenia.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel3.add(txtContrasenia);
+        txtContrasenia.setBounds(130, 260, 210, 30);
 
-        Registro1.setText("Registro");
-        add(Registro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("________________________________");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(150, 77, 200, 20);
 
-        lblDatosPersonales1.setText("DATOS PERSONALES");
-        add(lblDatosPersonales1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("___________________________________");
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(130, 280, 210, 17);
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("___________________________");
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(180, 150, 170, 30);
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("________________________________");
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(150, 80, 200, 90);
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("___________________________________");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(130, 230, 210, 17);
+
+        jPanel4.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(179, 142, 93), 4));
+        jPanel4.setLayout(null);
+
+        Nombre4.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre4.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre4.setText("Nombre:");
+        jPanel4.add(Nombre4);
+        Nombre4.setBounds(20, 30, 70, 20);
+
+        txtNombre1.setBackground(new java.awt.Color(157, 36, 73));
+        txtNombre1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtNombre1.setBorder(null);
+        txtNombre1.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel4.add(txtNombre1);
+        txtNombre1.setBounds(150, 20, 190, 30);
+
+        Nombre5.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre5.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre5.setText("Apellido Paterno:");
+        jPanel4.add(Nombre5);
+        Nombre5.setBounds(20, 70, 120, 20);
+
+        txtApellidoPaterno1.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoPaterno1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoPaterno1.setBorder(null);
+        txtApellidoPaterno1.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel4.add(txtApellidoPaterno1);
+        txtApellidoPaterno1.setBounds(150, 60, 190, 30);
+
+        Nombre6.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre6.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre6.setText("Apellido Materno:");
+        jPanel4.add(Nombre6);
+        Nombre6.setBounds(20, 110, 120, 20);
+
+        txtApellidoMaterno1.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoMaterno1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoMaterno1.setBorder(null);
+        txtApellidoMaterno1.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel4.add(txtApellidoMaterno1);
+        txtApellidoMaterno1.setBounds(150, 100, 190, 30);
+
+        Nombre7.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre7.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre7.setText("Fecha de Nacimiento:");
+        jPanel4.add(Nombre7);
+        Nombre7.setBounds(20, 150, 150, 20);
+
+        lblAviso1.setFont(new java.awt.Font("NATS", 2, 16)); // NOI18N
+        lblAviso1.setForeground(new java.awt.Color(255, 255, 255));
+        lblAviso1.setText("En formato yyyy-MM-dd.     Ejemplo: 1988-02-13");
+        jPanel4.add(lblAviso1);
+        lblAviso1.setBounds(30, 180, 310, 25);
+
+        txtFechaNacimiento1.setBackground(new java.awt.Color(157, 36, 73));
+        txtFechaNacimiento1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtFechaNacimiento1.setBorder(null);
+        txtFechaNacimiento1.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel4.add(txtFechaNacimiento1);
+        txtFechaNacimiento1.setBounds(180, 140, 160, 30);
+
+        jLabel10.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Correo:");
+        jPanel4.add(jLabel10);
+        jLabel10.setBounds(20, 220, 60, 28);
+
+        txtCorreo1.setBackground(new java.awt.Color(157, 36, 73));
+        txtCorreo1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtCorreo1.setBorder(null);
+        txtCorreo1.setCaretColor(new java.awt.Color(157, 36, 73));
+        txtCorreo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreo1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(txtCorreo1);
+        txtCorreo1.setBounds(130, 210, 210, 30);
+
+        jLabel11.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Contrasenia:");
+        jPanel4.add(jLabel11);
+        jLabel11.setBounds(20, 270, 90, 20);
+
+        txtContrasenia1.setBackground(new java.awt.Color(157, 36, 73));
+        txtContrasenia1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtContrasenia1.setBorder(null);
+        txtContrasenia1.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel4.add(txtContrasenia1);
+        txtContrasenia1.setBounds(130, 260, 210, 30);
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("________________________________");
+        jPanel4.add(jLabel12);
+        jLabel12.setBounds(150, 77, 200, 20);
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("___________________________________");
+        jPanel4.add(jLabel13);
+        jLabel13.setBounds(130, 280, 210, 17);
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("___________________________");
+        jPanel4.add(jLabel14);
+        jLabel14.setBounds(180, 150, 170, 30);
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("________________________________");
+        jPanel4.add(jLabel15);
+        jLabel15.setBounds(150, 80, 200, 90);
+
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("________________________________");
+        jPanel4.add(jLabel16);
+        jLabel16.setBounds(150, 40, 200, 20);
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("___________________________________");
+        jPanel4.add(jLabel17);
+        jLabel17.setBounds(130, 230, 210, 17);
+
+        jPanel3.add(jPanel4);
+        jPanel4.setBounds(0, 0, 0, 0);
+
+        jPanel5.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(179, 142, 93), 4));
+        jPanel5.setLayout(null);
+
+        Nombre8.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre8.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre8.setText("Nombre:");
+        jPanel5.add(Nombre8);
+        Nombre8.setBounds(20, 30, 70, 20);
+
+        txtNombre2.setBackground(new java.awt.Color(157, 36, 73));
+        txtNombre2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtNombre2.setBorder(null);
+        txtNombre2.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel5.add(txtNombre2);
+        txtNombre2.setBounds(150, 20, 190, 30);
+
+        Nombre9.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre9.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre9.setText("Apellido Paterno:");
+        jPanel5.add(Nombre9);
+        Nombre9.setBounds(20, 70, 120, 20);
+
+        txtApellidoPaterno2.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoPaterno2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoPaterno2.setBorder(null);
+        txtApellidoPaterno2.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel5.add(txtApellidoPaterno2);
+        txtApellidoPaterno2.setBounds(150, 60, 190, 30);
+
+        Nombre10.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre10.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre10.setText("Apellido Materno:");
+        jPanel5.add(Nombre10);
+        Nombre10.setBounds(20, 110, 120, 20);
+
+        txtApellidoMaterno2.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoMaterno2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoMaterno2.setBorder(null);
+        txtApellidoMaterno2.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel5.add(txtApellidoMaterno2);
+        txtApellidoMaterno2.setBounds(150, 100, 190, 30);
+
+        Nombre11.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre11.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre11.setText("Fecha de Nacimiento:");
+        jPanel5.add(Nombre11);
+        Nombre11.setBounds(20, 150, 150, 20);
+
+        lblAviso2.setFont(new java.awt.Font("NATS", 2, 16)); // NOI18N
+        lblAviso2.setForeground(new java.awt.Color(255, 255, 255));
+        lblAviso2.setText("En formato yyyy-MM-dd.     Ejemplo: 1988-02-13");
+        jPanel5.add(lblAviso2);
+        lblAviso2.setBounds(30, 180, 310, 25);
+
+        txtFechaNacimiento2.setBackground(new java.awt.Color(157, 36, 73));
+        txtFechaNacimiento2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtFechaNacimiento2.setBorder(null);
+        txtFechaNacimiento2.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel5.add(txtFechaNacimiento2);
+        txtFechaNacimiento2.setBounds(180, 140, 160, 30);
+
+        jLabel18.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Correo:");
+        jPanel5.add(jLabel18);
+        jLabel18.setBounds(20, 220, 60, 28);
+
+        txtCorreo2.setBackground(new java.awt.Color(157, 36, 73));
+        txtCorreo2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtCorreo2.setBorder(null);
+        txtCorreo2.setCaretColor(new java.awt.Color(157, 36, 73));
+        txtCorreo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreo2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(txtCorreo2);
+        txtCorreo2.setBounds(130, 210, 210, 30);
+
+        jLabel19.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Contrasenia:");
+        jPanel5.add(jLabel19);
+        jLabel19.setBounds(20, 270, 90, 20);
+
+        txtContrasenia2.setBackground(new java.awt.Color(157, 36, 73));
+        txtContrasenia2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtContrasenia2.setBorder(null);
+        txtContrasenia2.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel5.add(txtContrasenia2);
+        txtContrasenia2.setBounds(130, 260, 210, 30);
+
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("________________________________");
+        jPanel5.add(jLabel20);
+        jLabel20.setBounds(150, 77, 200, 20);
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("___________________________________");
+        jPanel5.add(jLabel21);
+        jLabel21.setBounds(130, 280, 210, 17);
+
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("___________________________");
+        jPanel5.add(jLabel22);
+        jLabel22.setBounds(180, 150, 170, 30);
+
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("________________________________");
+        jPanel5.add(jLabel23);
+        jLabel23.setBounds(150, 80, 200, 90);
+
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("________________________________");
+        jPanel5.add(jLabel24);
+        jLabel24.setBounds(150, 40, 200, 20);
+
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("___________________________________");
+        jPanel5.add(jLabel25);
+        jLabel25.setBounds(130, 230, 210, 17);
+
+        jPanel6.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(179, 142, 93), 4));
+        jPanel6.setLayout(null);
+
+        Nombre12.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre12.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre12.setText("Nombre:");
+        jPanel6.add(Nombre12);
+        Nombre12.setBounds(20, 30, 70, 20);
+
+        txtNombre3.setBackground(new java.awt.Color(157, 36, 73));
+        txtNombre3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtNombre3.setBorder(null);
+        txtNombre3.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel6.add(txtNombre3);
+        txtNombre3.setBounds(150, 20, 190, 30);
+
+        Nombre13.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre13.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre13.setText("Apellido Paterno:");
+        jPanel6.add(Nombre13);
+        Nombre13.setBounds(20, 70, 120, 20);
+
+        txtApellidoPaterno3.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoPaterno3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoPaterno3.setBorder(null);
+        txtApellidoPaterno3.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel6.add(txtApellidoPaterno3);
+        txtApellidoPaterno3.setBounds(150, 60, 190, 30);
+
+        Nombre14.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre14.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre14.setText("Apellido Materno:");
+        jPanel6.add(Nombre14);
+        Nombre14.setBounds(20, 110, 120, 20);
+
+        txtApellidoMaterno3.setBackground(new java.awt.Color(157, 36, 73));
+        txtApellidoMaterno3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtApellidoMaterno3.setBorder(null);
+        txtApellidoMaterno3.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel6.add(txtApellidoMaterno3);
+        txtApellidoMaterno3.setBounds(150, 100, 190, 30);
+
+        Nombre15.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Nombre15.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre15.setText("Fecha de Nacimiento:");
+        jPanel6.add(Nombre15);
+        Nombre15.setBounds(20, 150, 150, 20);
+
+        lblAviso3.setFont(new java.awt.Font("NATS", 2, 16)); // NOI18N
+        lblAviso3.setForeground(new java.awt.Color(255, 255, 255));
+        lblAviso3.setText("En formato yyyy-MM-dd.     Ejemplo: 1988-02-13");
+        jPanel6.add(lblAviso3);
+        lblAviso3.setBounds(30, 180, 310, 25);
+
+        txtFechaNacimiento3.setBackground(new java.awt.Color(157, 36, 73));
+        txtFechaNacimiento3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtFechaNacimiento3.setBorder(null);
+        txtFechaNacimiento3.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel6.add(txtFechaNacimiento3);
+        txtFechaNacimiento3.setBounds(180, 140, 160, 30);
+
+        jLabel26.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Correo:");
+        jPanel6.add(jLabel26);
+        jLabel26.setBounds(20, 220, 60, 28);
+
+        txtCorreo3.setBackground(new java.awt.Color(157, 36, 73));
+        txtCorreo3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtCorreo3.setBorder(null);
+        txtCorreo3.setCaretColor(new java.awt.Color(157, 36, 73));
+        txtCorreo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreo3ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(txtCorreo3);
+        txtCorreo3.setBounds(130, 210, 210, 30);
+
+        jLabel27.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Contrasenia:");
+        jPanel6.add(jLabel27);
+        jLabel27.setBounds(20, 270, 90, 20);
+
+        txtContrasenia3.setBackground(new java.awt.Color(157, 36, 73));
+        txtContrasenia3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        txtContrasenia3.setBorder(null);
+        txtContrasenia3.setCaretColor(new java.awt.Color(157, 36, 73));
+        jPanel6.add(txtContrasenia3);
+        txtContrasenia3.setBounds(130, 260, 210, 30);
+
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("________________________________");
+        jPanel6.add(jLabel28);
+        jLabel28.setBounds(150, 77, 200, 20);
+
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("___________________________________");
+        jPanel6.add(jLabel29);
+        jLabel29.setBounds(130, 280, 210, 17);
+
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("___________________________");
+        jPanel6.add(jLabel30);
+        jLabel30.setBounds(180, 150, 170, 30);
+
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("________________________________");
+        jPanel6.add(jLabel31);
+        jLabel31.setBounds(150, 80, 200, 90);
+
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("________________________________");
+        jPanel6.add(jLabel32);
+        jLabel32.setBounds(150, 40, 200, 20);
+
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("___________________________________");
+        jPanel6.add(jLabel33);
+        jLabel33.setBounds(130, 230, 210, 17);
+
+        jPanel5.add(jPanel6);
+        jPanel6.setBounds(0, 0, 0, 0);
+
+        jPanel3.add(jPanel5);
+        jPanel5.setBounds(0, 0, 0, 0);
+
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("________________________________");
+        jPanel3.add(jLabel34);
+        jLabel34.setBounds(150, 40, 200, 20);
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(24, 211, 367, 314);
+
+        lblDatosPersonales2.setFont(new java.awt.Font("NATS", 0, 20)); // NOI18N
+        lblDatosPersonales2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDatosPersonales2.setText("DATOS DOMICILIARIOS");
+        jPanel1.add(lblDatosPersonales2);
+        lblDatosPersonales2.setBounds(532, 171, 161, 31);
+
+        jPanel7.setBackground(new java.awt.Color(157, 36, 73));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(179, 142, 93), 4));
+        jPanel7.setLayout(null);
+
+        Direccion.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Direccion.setForeground(new java.awt.Color(255, 255, 255));
+        Direccion.setText("Calle:");
+        jPanel7.add(Direccion);
+        Direccion.setBounds(30, 40, 50, 28);
+
+        Direccion1.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Direccion1.setForeground(new java.awt.Color(255, 255, 255));
         Direccion1.setText("Colonia:");
-        add(Direccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
-        add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 160, -1));
-        add(txtCodigoPostal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 100, -1));
+        jPanel7.add(Direccion1);
+        Direccion1.setBounds(30, 90, 60, 28);
 
+        Contraseña.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Contraseña.setForeground(new java.awt.Color(255, 255, 255));
+        Contraseña.setText("Codigo Postal:");
+        jPanel7.add(Contraseña);
+        Contraseña.setBounds(30, 250, 100, 28);
+
+        Fecha.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Fecha.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha.setText("Numero interior:");
+        jPanel7.add(Fecha);
+        Fecha.setBounds(30, 150, 110, 20);
+
+        Fecha1.setFont(new java.awt.Font("NATS", 0, 18)); // NOI18N
+        Fecha1.setForeground(new java.awt.Color(255, 255, 255));
         Fecha1.setText("Numero exterior:");
-        add(Fecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, -1));
-        add(txtNumExterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 90, -1));
+        jPanel7.add(Fecha1);
+        Fecha1.setBounds(30, 200, 120, 28);
 
-        Nombre3.setText("Apellido Materno:");
-        add(Nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        txtCalle.setBackground(new java.awt.Color(157, 36, 73));
+        txtCalle.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtCalle.setForeground(new java.awt.Color(204, 204, 204));
+        txtCalle.setBorder(null);
+        jPanel7.add(txtCalle);
+        txtCalle.setBounds(120, 30, 180, 19);
 
+        txtNumInterior.setBackground(new java.awt.Color(157, 36, 73));
+        txtNumInterior.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtNumInterior.setForeground(new java.awt.Color(204, 204, 204));
+        txtNumInterior.setBorder(null);
+        jPanel7.add(txtNumInterior);
+        txtNumInterior.setBounds(140, 140, 160, 30);
+
+        txtColonia.setBackground(new java.awt.Color(157, 36, 73));
+        txtColonia.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtColonia.setForeground(new java.awt.Color(204, 204, 204));
+        txtColonia.setBorder(null);
+        jPanel7.add(txtColonia);
+        txtColonia.setBounds(120, 80, 180, 19);
+
+        txtCodigoPostal.setBackground(new java.awt.Color(157, 36, 73));
+        txtCodigoPostal.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtCodigoPostal.setForeground(new java.awt.Color(204, 204, 204));
+        txtCodigoPostal.setBorder(null);
+        jPanel7.add(txtCodigoPostal);
+        txtCodigoPostal.setBounds(150, 240, 150, 19);
+
+        txtNumExterior.setBackground(new java.awt.Color(157, 36, 73));
+        txtNumExterior.setFont(new java.awt.Font("Meera", 0, 18)); // NOI18N
+        txtNumExterior.setForeground(new java.awt.Color(204, 204, 204));
+        txtNumExterior.setBorder(null);
+        jPanel7.add(txtNumExterior);
+        txtNumExterior.setBounds(150, 190, 150, 19);
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("___________________________");
+        jPanel7.add(jLabel8);
+        jLabel8.setBounds(140, 160, 162, 20);
+
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("______________________________");
+        jPanel7.add(jLabel35);
+        jLabel35.setBounds(120, 50, 180, 20);
+
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("_________________________");
+        jPanel7.add(jLabel36);
+        jLabel36.setBounds(150, 260, 192, 20);
+
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setText("______________________________");
+        jPanel7.add(jLabel37);
+        jLabel37.setBounds(120, 100, 180, 20);
+
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setText("_________________________");
+        jPanel7.add(jLabel38);
+        jLabel38.setBounds(150, 210, 192, 20);
+
+        jPanel1.add(jPanel7);
+        jPanel7.setBounds(436, 211, 338, 314);
+
+        btnRegresar1.setBackground(new java.awt.Color(98, 17, 50));
+        btnRegresar1.setFont(new java.awt.Font("NATS", 1, 24)); // NOI18N
+        btnRegresar1.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar1.setText("Regresar");
+        btnRegresar1.setBorder(null);
         btnRegresar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresar1ActionPerformed(evt);
             }
         });
-        add(btnRegresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
+        jPanel1.add(btnRegresar1);
+        btnRegresar1.setBounds(290, 540, 100, 50);
 
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setBackground(new java.awt.Color(40, 92, 77));
+        btnEnviar.setFont(new java.awt.Font("NATS", 1, 24)); // NOI18N
+        btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEnviar.setText("Enviar");
+        btnEnviar.setBorder(null);
+        btnEnviar.setBorderPainted(false);
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, -1, -1));
-        add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 120, -1));
+        jPanel1.add(btnEnviar);
+        btnEnviar.setBounds(440, 540, 100, 50);
 
-        lblAviso.setText("En formato yyyy-MM-dd.     Ejemplo: 1988-02-13");
-        add(lblAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 280, -1));
+        lblRegistroUsuario1.setFont(new java.awt.Font("NATS", 0, 24)); // NOI18N
+        lblRegistroUsuario1.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegistroUsuario1.setText("ACTUALIZACION DE DATOS");
+        lblRegistroUsuario1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(lblRegistroUsuario1);
+        lblRegistroUsuario1.setBounds(40, 120, 250, 28);
 
-        jLabel1.setText("Contraseña");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 187, -1, 30));
-        add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 200, -1));
-
-        jLabel2.setText("Correo");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-        add(txtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -272,13 +959,25 @@ private void actualizar() {
 
     private void btnRegresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresar1ActionPerformed
         this.setVisible(false);
-        MenuPrincipalForm menuPrincipal = new MenuPrincipalForm(clientesDAO);
-        menuPrincipal.setVisible(true);
+        MenuClienteForm menuCliente = new MenuClienteForm(clientesDAO, cliente);
+        menuCliente.setVisible(true);
     }//GEN-LAST:event_btnRegresar1ActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        limpiar();
-    }//GEN-LAST:event_btnLimpiarActionPerformed
+    private void txtCorreo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreo3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreo3ActionPerformed
+
+    private void txtCorreo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreo2ActionPerformed
+
+    private void txtCorreo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreo1ActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Contraseña;
@@ -288,26 +987,103 @@ private void actualizar() {
     private javax.swing.JLabel Fecha1;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Nombre1;
+    private javax.swing.JLabel Nombre10;
+    private javax.swing.JLabel Nombre11;
+    private javax.swing.JLabel Nombre12;
+    private javax.swing.JLabel Nombre13;
+    private javax.swing.JLabel Nombre14;
+    private javax.swing.JLabel Nombre15;
     private javax.swing.JLabel Nombre2;
     private javax.swing.JLabel Nombre3;
-    private javax.swing.JLabel Registro1;
+    private javax.swing.JLabel Nombre4;
+    private javax.swing.JLabel Nombre5;
+    private javax.swing.JLabel Nombre6;
+    private javax.swing.JLabel Nombre7;
+    private javax.swing.JLabel Nombre8;
+    private javax.swing.JLabel Nombre9;
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAviso;
-    private javax.swing.JLabel lblDatosPersonales;
+    private javax.swing.JLabel lblAviso1;
+    private javax.swing.JLabel lblAviso2;
+    private javax.swing.JLabel lblAviso3;
     private javax.swing.JLabel lblDatosPersonales1;
+    private javax.swing.JLabel lblDatosPersonales2;
+    private javax.swing.JLabel lblRegistroUsuario;
+    private javax.swing.JLabel lblRegistroUsuario1;
     private javax.swing.JTextField txtApellidoMaterno;
+    private javax.swing.JTextField txtApellidoMaterno1;
+    private javax.swing.JTextField txtApellidoMaterno2;
+    private javax.swing.JTextField txtApellidoMaterno3;
     private javax.swing.JTextField txtApellidoPaterno;
+    private javax.swing.JTextField txtApellidoPaterno1;
+    private javax.swing.JTextField txtApellidoPaterno2;
+    private javax.swing.JTextField txtApellidoPaterno3;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
     private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JTextField txtContrasenia1;
+    private javax.swing.JTextField txtContrasenia2;
+    private javax.swing.JTextField txtContrasenia3;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtCorreo1;
+    private javax.swing.JTextField txtCorreo2;
+    private javax.swing.JTextField txtCorreo3;
     private javax.swing.JTextField txtFechaNacimiento;
+    private javax.swing.JTextField txtFechaNacimiento1;
+    private javax.swing.JTextField txtFechaNacimiento2;
+    private javax.swing.JTextField txtFechaNacimiento3;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtNombre3;
     private javax.swing.JTextField txtNumExterior;
     private javax.swing.JTextField txtNumInterior;
     // End of variables declaration//GEN-END:variables
