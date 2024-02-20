@@ -1,0 +1,50 @@
+@options
+@packages
+-classpath
+'/home/gamaliel/.m2/repository/com/mysql/mysql-connector-j/8.2.0/mysql-connector-j-8.2.0.jar:/home/gamaliel/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar:/home/gamaliel/.m2/repository/com/itson/ProyectoBancoBDADominio/1.0-SNAPSHOT/ProyectoBancoBDADominio-1.0-SNAPSHOT.jar:/home/gamaliel/.m2/repository/com/itson/ProyectoBancoBDAPersistencia/1.0-SNAPSHOT/ProyectoBancoBDAPersistencia-1.0-SNAPSHOT.jar:/home/gamaliel/.m2/repository/unknown/binary/AbsoluteLayout/SNAPSHOT/AbsoluteLayout-SNAPSHOT.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'ProyectoBancoBDA 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'ProyectoBancoBDA 1.0-SNAPSHOT API'
+com.itson.proyectobancobda
+/home/gamaliel/.m2/repository/com/mysql/mysql-connector-j/8.2.0/mysql-connector-j-8.2.0.jar = 1698223563000
+/home/gamaliel/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar = 1666818740000
+/home/gamaliel/.m2/repository/com/itson/ProyectoBancoBDADominio/1.0-SNAPSHOT/ProyectoBancoBDADominio-1.0-SNAPSHOT.jar = 1708410049543
+/home/gamaliel/.m2/repository/com/itson/ProyectoBancoBDAPersistencia/1.0-SNAPSHOT/ProyectoBancoBDAPersistencia-1.0-SNAPSHOT.jar = 1708404185380
+/home/gamaliel/.m2/repository/unknown/binary/AbsoluteLayout/SNAPSHOT/AbsoluteLayout-SNAPSHOT.jar = 1698935595120
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/src/main/java = 1708403576621
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/allclasses-index.html = 1708410222189
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/serialized-form.html = 1708410222137
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/member-search-index.js = 1708410222193
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/module-search-index.js = 1708410222193
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/search.js = 1708410222221
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/script.js = 1708410222217
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/package-search-index.js = 1708410222193
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/index-all.html = 1708410222205
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/tag-search-index.js = 1708410222193
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/element-list = 1708410221909
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/index.html = 1708410222209
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/jquery-ui.overrides.css = 1708410222225
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/overview-tree.html = 1708410222169
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/help-doc.html = 1708410222213
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/stylesheet.css = 1708410222217
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/allpackages-index.html = 1708410222189
+/home/gamaliel/Documentos/proyectobda/ProyectoBancoBDA/target/site/apidocs/type-search-index.js = 1708410222193

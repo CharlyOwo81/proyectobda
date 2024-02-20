@@ -21,21 +21,21 @@ USE `proyecto_banco_bda` ;
 -- Table `proyecto_banco_bda`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`clientes` (
-  `id_cliente` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(200) NOT NULL,
   `apellido_paterno` VARCHAR(200) NOT NULL,
   `apellido_materno` VARCHAR(200) NOT NULL,
-  `fecha_nacimiento` DATE NULL DEFAULT NULL,
+  `fecha_nacimiento` DATE NOT NULL,
   `calle` VARCHAR(300) NOT NULL,
   `colonia` VARCHAR(200) NOT NULL,
   `numero_interior` VARCHAR(5) NULL DEFAULT NULL,
   `numero_exterior` VARCHAR(10) NULL DEFAULT '0',
   `codigo_postal` VARCHAR(5) NOT NULL,
-  `usuario_cliente` VARCHAR(45) NOT NULL,
+  `correo_cliente` VARCHAR(250) NOT NULL,
   `contrasenia_cliente` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id_cliente`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -45,15 +45,16 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proyecto_banco_bda`.`cuentas` (
   `id_cuenta` INT NOT NULL AUTO_INCREMENT,
-  `id_cliente` INT NOT NULL,
-  `numero_cuenta` INT NOT NULL,
+  `numero_cuenta` VARCHAR(16) NOT NULL,
   `fecha_apertura` DATE NOT NULL,
-  `saldo_en_pesos` DECIMAL(15,2) NOT NULL,
+  `saldo_en_pesos` DOUBLE NOT NULL,
+  `id_cliente` INT NOT NULL,
   PRIMARY KEY (`id_cuenta`),
-  INDEX `id_cliente_idx` (`id_cliente` ASC) VISIBLE,
+  UNIQUE INDEX `numero_cuenta_UNIQUE` (`numero_cuenta` ASC) VISIBLE,
+  INDEX `cuentas_ibfk_1_idx` (`id_cliente` ASC) VISIBLE,
   CONSTRAINT `cuentas_ibfk_1`
     FOREIGN KEY (`id_cliente`)
-    REFERENCES `proyecto_banco_bda`.`clientes` (`id_cliente`))
+    REFERENCES `proyecto_banco_bda`.`clientes` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;

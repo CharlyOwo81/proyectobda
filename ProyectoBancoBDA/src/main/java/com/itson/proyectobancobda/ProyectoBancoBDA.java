@@ -5,7 +5,6 @@ import com.itson.proyectobancobdapersistencia.conexion.Conexion;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.ClientesDAO;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
-import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import java.util.logging.Logger;
 
 /*
