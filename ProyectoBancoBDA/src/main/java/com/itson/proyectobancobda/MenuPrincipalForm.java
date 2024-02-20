@@ -23,16 +23,6 @@ public class MenuPrincipalForm extends javax.swing.JFrame {
         this.clientesDAO = clientesDAO;
     }
 
-    
-    
-//    public MenuPrincipalForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO, IConexion conexion, Cliente cliente) {
-//        initComponents();        
-//        this.clientesDAO = clientesDAO;
-//        this.cuentasDAO = cuentasDAO;
-//        this.conexion = conexion;
-//        this.cliente = cliente;
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

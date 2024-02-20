@@ -4,14 +4,19 @@
  */
 package com.itson.proyectobancobda;
 
-import com.itson.proyectobancobdadominio.Cliente;
+import com.itson.proyectobancobdapersistencia.conexion.IConexion;
+import com.itson.proyectobancobdapersistencia.daos.CuentasDAO;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 import com.itson.proyectobancobdapersistencia.dtos.CuentaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,11 +30,12 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
      */
     
     private final IClientesDAO clientesDAO;    
-    private ICuentasDAO cuentasDAO;    
-    private Cliente cliente;    
-    public CuentaNuevaForm(IClientesDAO clientesDAO) {
+    private final ICuentasDAO cuentasDAO; 
+    
+    public CuentaNuevaForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO) {      
         initComponents();
-        this.clientesDAO = clientesDAO;
+        this.cuentasDAO = cuentasDAO; 
+        this.clientesDAO = clientesDAO ; 
     }
 
     private void generarCuentaAleatoria(){
@@ -57,67 +63,45 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
         return idCliente;
     }    
 
-//        
-//        if (!this.lblNumeroCuenta.getText().equals("")){
-//                try {
-//                    LocalDate localDate = LocalDate.now();
-//                    Date date = java.sql.Date.valueOf(localDate);
-//                    SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//                    String fecha = simple.format(date);
-//
-//                    String numCuenta = lblNumeroCuenta.getText();
-//
-//                    CuentaDto cuenta = new CuentaDto(numCuenta, fecha, , cli.getId());
-//
-//                    control.agregarCuenta(cuenta);
-//
-//                    ini = new InicioUsuario(control, cli);
-//                    setVisible(false);
-//                    ini.setVisible(true);
-//                } catch (PersistenciaExcepcion ex) {
-//                    Logger.getLogger(AgregarCuenta.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "La cuenta tiene que ser de 10 digitos");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(this, "La cuenta tiene que ser de 10 digitos");
-//        }    
     
-    private void crearCuentaNueva(){
-        Long idCliente = obtenerIdCliente();
-        String numCuenta = lblNumeroCuenta.getText();
-        Double saldo = 0.0;
-        Date fechaApertura = new Date(System.currentTimeMillis());
+    private void crearCuentaNueva() throws ValidacionDTOException {
+        long idCliente = obtenerIdCliente();
 
-        Cliente cliente = this.cliente; // Asegúrate de que cliente tenga un valor asignado antes de invocar el método guardar()
-        if (cliente == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente", "Error de Validación", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    
-        CuentaDTO cuentaNueva = new CuentaDTO();
+        if (this.cuentasDAO == null) {
+            throw new NullPointerException("El atributo 'cuentasDAO' es null");
+            
+        } else{
+            if (idCliente != -1) {
+                String numCuenta = lblNumeroCuenta.getText();
+                Double saldo = Double.valueOf(txtSaldoPesos.getText());
 
-        cuentaNueva.setNumCuenta(numCuenta);
-        cuentaNueva.setSaldoPesos(saldo);
-        cuentaNueva.setFechaApertura(fechaApertura);
-        cuentaNueva.setIdCliente(idCliente);
+                LocalDate fechaActual = LocalDate.now();
+                Date fechaAperturaActual = Date.valueOf(fechaActual);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        try {
-            cuentaNueva.esValido();
-            this.cuentasDAO.agregar(cuentaNueva);
-            JOptionPane.showMessageDialog(this, "Cliente Agregado");
-        } catch (ValidacionDTOException ex) {
-            JOptionPane.showMessageDialog(this, 
-                                            ex.getMessage(), 
-                                            "Error de Validación", 
-                                            JOptionPane.ERROR_MESSAGE);
-        }catch(PersistenciaException ex){
-            JOptionPane.showMessageDialog(this,
-                                          "No fue posible agregar al socio", 
-                                          "Error de Almacenamiento",
-                                          JOptionPane.ERROR_MESSAGE);  
-        }
+                String fechaApertura = formatter.format(fechaAperturaActual);
+
+                CuentaDTO cuentaNueva = new CuentaDTO();
+
+                cuentaNueva.setNumCuenta(numCuenta);
+                cuentaNueva.setSaldoPesos(saldo);
+                cuentaNueva.setFechaApertura(fechaApertura);
+                cuentaNueva.setIdCliente(idCliente);
+
+                try {
+                    cuentaNueva.esValido();
+                    this.cuentasDAO.agregar(cuentaNueva);
+                    JOptionPane.showMessageDialog(this, "Cuenta creada exitósamente.");
+                } catch (PersistenciaException ex) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error al crear la cuenta.", 
+                            "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                    System.err.println("Error: " + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+            }                
+        }       
     }
     
     /**
@@ -223,7 +207,14 @@ public class CuentaNuevaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        crearCuentaNueva();
+        try {
+            crearCuentaNueva();
+        } catch (ValidacionDTOException ex) {
+            Logger.getLogger(CuentaNuevaForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al crear la cuenta.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);                    
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
 

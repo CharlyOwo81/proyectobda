@@ -55,7 +55,18 @@ public class ClientesDAO implements IClientesDAO {
                 ResultSet keys = comando.getGeneratedKeys();
                 if (keys.next()) {
                     long idGenerado = keys.getLong(1);
-                    Cliente cliente = new Cliente(idGenerado, clienteNuevo.getNombre(), clienteNuevo.getApellidoPaterno(), clienteNuevo.getApellidoMaterno(), clienteNuevo.getFechaNacimiento(), clienteNuevo.getColonia(), clienteNuevo.getCalle(), clienteNuevo.getNumInterior(), clienteNuevo.getNumExterior(), clienteNuevo.getCodigoPostal(), clienteNuevo.getCorreo(), clienteNuevo.getContrasenia());
+                    Cliente cliente = new Cliente(idGenerado, 
+                            clienteNuevo.getNombre(), 
+                            clienteNuevo.getApellidoPaterno(), 
+                            clienteNuevo.getApellidoMaterno(), 
+                            clienteNuevo.getFechaNacimiento(), 
+                            clienteNuevo.getColonia(), 
+                            clienteNuevo.getCalle(), 
+                            clienteNuevo.getNumInterior(), 
+                            clienteNuevo.getNumExterior(), 
+                            clienteNuevo.getCodigoPostal(), 
+                            clienteNuevo.getCorreo(), 
+                            clienteNuevo.getContrasenia());
                     return cliente;
                 } else {
                     throw new PersistenciaException("No se pudo obtener el ID generado para el nuevo cliente");

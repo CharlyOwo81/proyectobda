@@ -5,7 +5,6 @@
 package com.itson.proyectobancobdapersistencia.dtos;
 
 import com.itson.proyectobancobdapersistencia.excepciones.ValidacionDTOException;
-import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,13 +13,25 @@ import java.util.regex.Pattern;
  * @author gamaliel
  */
 public class CuentaDTO {
+    private long id;
     private String numCuenta;
     private Double saldoPesos;
-    private Date fechaApertura;
-    private Long idCliente;
-    private String validadorNumerico = "^[0-9]+$";
+    private String fechaApertura;
+    private long idCliente;
+    
+    //ATRIBUTOS VALIDACIONES
+    private String validadorSaldo = "^[0-9]*\\.[0-9]{1,2}$";
+    private String validadorFechas = "^\\d{4}-\\d{2}-\\d{2}$";
     private Pattern patron;
     private Matcher coincidencia;    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNumCuenta() {
         return numCuenta;
@@ -38,11 +49,11 @@ public class CuentaDTO {
         this.saldoPesos = saldoPesos;
     }
 
-    public Date getFechaApertura() {
+    public String getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(Date fechaApertura) {
+    public void setFechaApertura(String fechaApertura) {
         this.fechaApertura = fechaApertura;
     }
 
@@ -57,31 +68,52 @@ public class CuentaDTO {
     public boolean esValido() throws ValidacionDTOException {
         try {
             validarNumeroCuenta();
-            validarSaldoPesos();          
+            validarSaldoPesos();
+            validarFechaApertura();
+            validarIdCliente();           
             return true;
         } catch (ValidacionDTOException ex) {
             throw ex;
         }
     }
-    
-    private void validadorNumerico(String texto, String mensajeError) throws ValidacionDTOException {
-        patron = Pattern.compile(validadorNumerico);
+
+    private void validarNumeroCuenta() throws ValidacionDTOException{
+        if (numCuenta == null || numCuenta.isBlank() || numCuenta.trim().length() != 16) {
+            throw new ValidacionDTOException("Número de Cuenta inválido");
+        }
+    }
+
+    private void validarSaldoPesos() throws ValidacionDTOException{
+        if (saldoPesos == null || saldoPesos <= 0) {
+            throw new ValidacionDTOException("Saldo inválido para la plataforma");
+        }
+    }
+
+    private void validarFechaApertura() throws ValidacionDTOException{
+        if (fechaApertura == null || fechaApertura.isBlank()) {
+            throw new ValidacionDTOException("Fecha de Apertura inválida");
+        }
+        validarFechas(fechaApertura, "Fecha de Apertura inválida");    
+    }
+
+    private void validarIdCliente() throws ValidacionDTOException {
+        if (idCliente == -1) {
+            throw new ValidacionDTOException("Cliente inválido");
+        }
+    }
+    private void validadorSaldo(String texto, String mensajeError) throws ValidacionDTOException {
+        patron = Pattern.compile(validadorSaldo);
         coincidencia = patron.matcher(texto);
         if (!coincidencia.matches()) {
             throw new ValidacionDTOException(mensajeError);
         }
     } 
-
-    private void validarNumeroCuenta() throws ValidacionDTOException{
-        if (numCuenta == null || numCuenta.isEmpty() || numCuenta.trim().length() != 16) {
-            throw new ValidacionDTOException("El número de cuenta no puede estar vacío");
-        }
-        validadorNumerico(numCuenta, "Número de cuenta inválido");
-    }
-
-    private void validarSaldoPesos() throws ValidacionDTOException{
-        if (saldoPesos == null || saldoPesos < 0) {
-            throw new ValidacionDTOException("El saldo en pesos debe ser mayor o igual a cero");
+    
+    private void validarFechas(String texto, String mensajeError) throws ValidacionDTOException{
+        patron = Pattern.compile(validadorFechas);
+        coincidencia = patron.matcher(texto);
+        if (!coincidencia.matches()) {
+            throw new ValidacionDTOException(mensajeError);
         }
     }
 }

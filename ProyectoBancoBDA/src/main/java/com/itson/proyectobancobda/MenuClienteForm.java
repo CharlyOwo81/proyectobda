@@ -2,8 +2,8 @@ package com.itson.proyectobancobda;
 
 
 import com.itson.proyectobancobdadominio.Cliente;
-import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,6 +17,7 @@ import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
 public class MenuClienteForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
+    private ICuentasDAO cuentasDAO;
     private Cliente cliente;
     /**
      * Creates new form MenuClienteForm
@@ -32,9 +33,6 @@ public class MenuClienteForm extends javax.swing.JFrame {
         return cliente;
     }    
       
-    private void crearCuenta(){
-
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,7 +122,7 @@ public class MenuClienteForm extends javax.swing.JFrame {
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
         this.setVisible(false);
-        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO);
+        MisCuentasForm menuPrincipal = new MisCuentasForm(clientesDAO, cuentasDAO);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 

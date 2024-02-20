@@ -7,6 +7,7 @@ package com.itson.proyectobancobda;
 import com.itson.proyectobancobdadominio.Cliente;
 import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.daos.IClientesDAO;
+import com.itson.proyectobancobdapersistencia.daos.ICuentasDAO;
 
 /**
  *
@@ -16,9 +17,10 @@ public class MisCuentasForm extends javax.swing.JFrame {
 
     private final IClientesDAO clientesDAO;
     private IConexion conexion;
+    private ICuentasDAO cuentasDAO;  
     private Cliente cliente;    
 
-    public MisCuentasForm(IClientesDAO clientesDAO) {
+    public MisCuentasForm(IClientesDAO clientesDAO, ICuentasDAO cuentasDAO) {
         initComponents();
         this.clientesDAO = clientesDAO;
         this.conexion = conexion;
@@ -125,7 +127,7 @@ public class MisCuentasForm extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         this.setVisible(false);
-        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO);
+        CuentaNuevaForm menuPrincipal = new CuentaNuevaForm(clientesDAO, cuentasDAO);
         menuPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCrearActionPerformed
 

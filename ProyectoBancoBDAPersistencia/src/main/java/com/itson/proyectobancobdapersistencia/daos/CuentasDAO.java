@@ -9,10 +9,15 @@ import com.itson.proyectobancobdapersistencia.conexion.IConexion;
 import com.itson.proyectobancobdapersistencia.dtos.CuentaDTO;
 import com.itson.proyectobancobdapersistencia.excepciones.PersistenciaException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,34 +35,41 @@ public class CuentasDAO implements ICuentasDAO{
     
     @Override
     public Cuenta agregar(CuentaDTO cuentaNueva) throws PersistenciaException {
-        String insertarCuentaSQL = 
-                    """
-                    INSERT INTO cuentas(numero_cuenta, saldo_en_pesos, fecha_apertura, id_cliente)
-                    VALUES(?, ?, ?, ?);
-                    """;
+        String cuentaNuevaSQL
+                = """
+                INSERT INTO cuentas(numero_cuenta, saldo_en_pesos, fecha_apertura, id_cliente)
+                VALUES(?, ?, ?, ?);
+            """;
         try (Connection conexion = this.conexionBD.obtenerConexion(); 
-             PreparedStatement comando = conexion.prepareStatement(insertarCuentaSQL, Statement.RETURN_GENERATED_KEYS);) {
+                PreparedStatement comando = conexion.prepareStatement(cuentaNuevaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, cuentaNueva.getNumCuenta());
-            comando.setDouble(2, 0.0);
-            comando.setDate(3, cuentaNueva.getFechaApertura());
+            comando.setDouble(2, cuentaNueva.getSaldoPesos());
+            comando.setString(3, cuentaNueva.getFechaApertura());
             comando.setLong(4, cuentaNueva.getIdCliente());
             
-            int numeroRegistrosInsertados = comando.executeUpdate();
-            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
-            ResultSet idsGenerados = comando.getGeneratedKeys();
-            idsGenerados.next();
+            int registrosAfectados = comando.executeUpdate();
+
+            if (registrosAfectados == 1) {
+                ResultSet keys = comando.getGeneratedKeys();
+                if (keys.next()) {
+                    long idGenerado = keys.getLong(1);
+                    Cuenta cuenta = new Cuenta(idGenerado,
+                            cuentaNueva.getNumCuenta(),
+                            cuentaNueva.getSaldoPesos(),
+                            cuentaNueva.getFechaApertura(),
+                            cuentaNueva.getIdCliente());
+                    return cuenta;
+                } else {
+                    throw new PersistenciaException("No se pudo obtener el ID generado para el nuevo cliente");
+                }
+            } else {
+                throw new PersistenciaException("No se pudo insertar el nuevo cliente en la base de datos");
+            }
             
-            Cuenta cuenta = new Cuenta(
-                    idsGenerados.getLong(1),
-                    cuentaNueva.getNumCuenta(),
-                    cuentaNueva.getSaldoPesos(),
-                    cuentaNueva.getFechaApertura(),
-                    cuentaNueva.getIdCliente()
-            );
-            return cuenta;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido agregar la cuenta", ex);
             throw new PersistenciaException("No se pudo agregar la cuenta");
         }
     }
+
 }

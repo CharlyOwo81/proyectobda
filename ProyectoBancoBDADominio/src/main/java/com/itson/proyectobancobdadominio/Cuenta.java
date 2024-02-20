@@ -13,11 +13,11 @@ import java.util.Objects;
  */
 public class Cuenta {
 
-    private Long id;
+    private long id;
     private String numCuenta;
     private Double saldoPesos;
-    private Date fechaApertura;
-    private Long idCliente;
+    private String fechaApertura;
+    private long idCliente;
 
     /**
      * Constructor vacío
@@ -25,7 +25,7 @@ public class Cuenta {
     public Cuenta() {
     }
 
-    public Cuenta(Long id, String numCuenta, Double saldoPesos, Date fechaApertura, Long idCliente) {
+    public Cuenta(long id, String numCuenta, Double saldoPesos, String fechaApertura, long idCliente) {
         this.id = id;
         this.numCuenta = numCuenta;
         this.saldoPesos = saldoPesos;
@@ -33,35 +33,24 @@ public class Cuenta {
         this.idCliente = idCliente;
     }
 
-    public Cuenta(String numCuenta, Double saldoPesos, Date fechaApertura, Long idCliente) {
+    public Cuenta(String numCuenta, Double saldoPesos, String fechaApertura, long idCliente) {
         this.numCuenta = numCuenta;
         this.saldoPesos = saldoPesos;
         this.fechaApertura = fechaApertura;
         this.idCliente = idCliente;
     }
 
-    public Cuenta(String numCuenta, Double saldoPesos, Date fechaApertura) {
+    public Cuenta(String numCuenta, Double saldoPesos, String fechaApertura) {
         this.numCuenta = numCuenta;
         this.saldoPesos = saldoPesos;
         this.fechaApertura = fechaApertura;
     }
 
-    public Cuenta(String numCuenta, Double saldoPesos) {
-        this.numCuenta = numCuenta;
-        this.saldoPesos = saldoPesos;
-    }
-
-    public Cuenta(String numCuenta, Double saldoPesos, Long idCliente) {
-        this.numCuenta = numCuenta;
-        this.saldoPesos = saldoPesos;
-        this.idCliente = idCliente;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -81,28 +70,30 @@ public class Cuenta {
         this.saldoPesos = saldoPesos;
     }
 
-    public Date getFechaApertura() {
+    public String getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(Date fechaApertura) {
+    public void setFechaApertura(String fechaApertura) {
         this.fechaApertura = fechaApertura;
     }
 
-    public Long getIdCliente() {
+    public long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Long idCliente) {
+    public void setIdCliente(long idCliente) {
         this.idCliente = idCliente;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.numCuenta);
-        hash = 41 * hash + Objects.hashCode(this.idCliente);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.numCuenta);
+        hash = 23 * hash + Objects.hashCode(this.saldoPesos);
+        hash = 23 * hash + Objects.hashCode(this.fechaApertura);
+        hash = 23 * hash + Objects.hashCode(this.idCliente);
         return hash;
     }
 
@@ -121,13 +112,13 @@ public class Cuenta {
         if (!Objects.equals(this.numCuenta, other.numCuenta)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.fechaApertura, other.fechaApertura)) {
             return false;
         }
-        return Objects.equals(this.idCliente, other.idCliente);
+        return Objects.equals(this.id, other.id);
     }
 
-  @Override
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cuenta{");
@@ -139,6 +130,6 @@ public class Cuenta {
         sb.append('}');
         return sb.toString();
     }
-        
+
     
 }
